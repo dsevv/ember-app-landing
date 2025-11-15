@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Ember</title>
+    <link rel="canonical" href="https://emberaidating.app/privacy.html">
     <script>
-        // Set base path for GitHub Pages
+        // Set base path - works for both GitHub Pages and custom domain
         (function() {
-            const repoName = 'ember-app-landing';
-            const base = document.createElement('base');
-            base.href = '/' + repoName + '/';
-            document.head.appendChild(base);
+            const hostname = window.location.hostname;
+            // If using custom domain (not github.io), no base path needed
+            if (hostname.includes('github.io')) {
+                const repoName = 'ember-app-landing';
+                const base = document.createElement('base');
+                base.href = '/' + repoName + '/';
+                document.head.appendChild(base);
+            }
+            // If custom domain, links work without base tag
         })();
     </script>
     <style>
