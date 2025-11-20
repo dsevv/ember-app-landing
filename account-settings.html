@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - Ember</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #ef4444;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .section p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        .link-box {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .link-box a {
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+        .warning-box {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .warning-box h3 {
+            color: #dc2626;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .warning-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .warning-box li {
+            margin-bottom: 8px;
+            color: #7f1d1d;
+        }
+        .contact-box {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .contact-box p {
+            margin-bottom: 10px;
+        }
+        .email-link {
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .email-link:hover {
+            text-decoration: underline;
+        }
+        nav {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        nav a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            color: #ef4444;
+        }
+        ul {
+            margin-left: 20px;
+            color: #666;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Account Settings</h1>
+        <p class="subtitle">Manage your Ember account</p>
+
+        <div class="section">
+            <h3>Account Management</h3>
+            <p>Manage your account settings and data from this page.</p>
+        </div>
+
+        <div class="warning-box">
+            <h3>⚠️ Delete Your Account</h3>
+            <p><strong>Important: This action cannot be undone</strong></p>
+            <p>Deleting your account will permanently remove:</p>
+            <ul>
+                <li>Your account and profile information</li>
+                <li>All your conversation history and saved chats</li>
+                <li>All uploaded screenshots</li>
+                <li>Your subscription status and usage statistics</li>
+                <li>All calendar events and scheduled dates</li>
+            </ul>
+            <p style="margin-top: 15px; font-weight: 600;">This action is permanent and cannot be reversed.</p>
+        </div>
+
+        <div class="section">
+            <h3>How to Request Account Deletion</h3>
+            <p>To delete your account and all associated data, please contact us:</p>
+        </div>
+
+        <div class="contact-box">
+            <h3 style="margin-bottom: 15px;">Contact Us to Delete Account</h3>
+            <p><strong>Email:</strong></p>
+            <p>
+                <a href="mailto:customersupport@embervisionventures.com?subject=Account Deletion Request&body=Please delete my account and all associated data.%0D%0A%0D%0AEmail address: [Your email]%0D%0AUser ID (if known): [Your user ID]%0D%0A%0D%0AReason (optional):" class="email-link">
+                    customersupport@embervisionventures.com
+                </a>
+            </p>
+            <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                Please include your account email address in your request. We will process your deletion request within 30 days as required by data protection regulations.
+            </p>
+        </div>
+
+        <div class="section">
+            <h3>What Happens After You Request Deletion</h3>
+            <p>Once we receive your deletion request:</p>
+            <ol style="margin-left: 20px; color: #666; line-height: 2;">
+                <li>We will verify your identity to ensure the request is legitimate</li>
+                <li>We will permanently delete your account and all associated data from our systems</li>
+                <li>We will confirm deletion via email (if email address is provided)</li>
+                <li>Deletion is typically completed within 30 days</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h3>Data Retention</h3>
+            <p>Some data may be retained for legal or regulatory purposes (e.g., transaction records for subscription billing) as required by law. However, all personal data and user content will be permanently deleted.</p>
+        </div>
+
+        <div class="section">
+            <h3>Your Account Rights</h3>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Access your personal data</li>
+                <li>Request deletion of your data</li>
+                <li>Update your account information</li>
+                <li>Manage your subscription</li>
+                <li>Export your data (contact us to request)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Subscription Management</h3>
+            <p>To manage or cancel your subscription:</p>
+            <ul>
+                <li><strong>iOS:</strong> Go to Settings → [Your Name] → Subscriptions → Ember</li>
+                <li><strong>Android:</strong> Go to Google Play Store → Subscriptions → Ember</li>
+            </ul>
+        </div>
+
+        <div class="contact-box">
+            <h3 style="margin-bottom: 15px;">Need Help?</h3>
+            <p>If you have questions about your account or need assistance:</p>
+            <p>
+                <strong>Email:</strong> 
+                <a href="mailto:customersupport@embervisionventures.com" class="email-link">
+                    customersupport@embervisionventures.com
+                </a>
+            </p>
+        </div>
+
+        <nav>
+            <a href="https://emberaidating.app/index.html">Home</a> | 
+            <a href="https://emberaidating.app/privacy.html">Privacy Policy</a> | 
+            <a href="https://emberaidating.app/terms.html">Terms of Service</a>
+        </nav>
+    </div>
+</body>
+</html>
+
