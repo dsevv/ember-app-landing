@@ -238,7 +238,7 @@
         }
         
         .toggle-switch:not(.active) .toggle-slider {
-            transform: translateX(70px);
+            transform: translateX(calc(140px - 60px - 8px));
         }
         
         
@@ -882,7 +882,11 @@
             }
             
             .toggle-switch.active .toggle-slider {
-                transform: translateX(60px);
+                transform: translateX(0);
+            }
+            
+            .toggle-switch:not(.active) .toggle-slider {
+                transform: translateX(calc(120px - 52px - 8px));
             }
             
             /* Mobile badge sizes - force exact match */
@@ -995,13 +999,6 @@
         
         <!-- Content Container Between Dividers -->
         <div class="content-between-dividers">
-            <!-- Platform Toggle Switch -->
-            <div class="platform-toggle">
-                <div class="toggle-switch active" id="platformToggle">
-                    <div class="toggle-slider">iOS</div>
-                </div>
-            </div>
-            
             <!-- QR Code Placeholders (iOS and Android) -->
             <div class="qr-placeholder" id="iosQR">
                 <div class="qr-label">iOS QR Code<br/><small>Coming Soon</small></div>
@@ -1009,6 +1006,13 @@
             
             <div class="qr-placeholder hidden" id="androidQR">
                 <div class="qr-label">Android QR Code<br/><small>Coming Soon</small></div>
+            </div>
+            
+            <!-- Platform Toggle Switch -->
+            <div class="platform-toggle">
+                <div class="toggle-switch active" id="platformToggle">
+                    <div class="toggle-slider">iOS</div>
+                </div>
             </div>
             
             <!-- App Store Badges -->
