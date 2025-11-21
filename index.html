@@ -363,7 +363,7 @@
         }
         
         .dropdown-tab.active .dropdown-tab-content {
-            max-height: 1000px;
+            max-height: 8000px;
             padding: 0 24px 24px;
         }
         
@@ -829,6 +829,20 @@
             .dropdown-tabs {
                 padding: 0 10px;
                 max-width: 100%;
+            }
+            
+            /* Mobile dropdown content - more space and padding */
+            .dropdown-tab-content {
+                padding: 0 16px;
+            }
+            
+            .dropdown-tab.active .dropdown-tab-content {
+                max-height: 10000px;
+                padding: 0 16px 32px;
+            }
+            
+            .dropdown-tab-header {
+                padding: 16px 20px;
             }
             
             /* Mobile widths relative to black container with padding (like dropdown tabs) */
