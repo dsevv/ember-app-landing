@@ -337,8 +337,8 @@
         
         /* User Count */
         .user-count {
-            margin: 24px 0;
-            padding: 16px 24px;
+            margin: 24px auto;
+            padding: 16px 20px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 16px;
@@ -346,6 +346,9 @@
             font-size: 1.125rem;
             color: rgba(255, 255, 255, 0.95);
             font-weight: 500;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
         
         .user-count .number {
@@ -383,8 +386,8 @@
         
         /* Testimonials Carousel */
         .testimonials {
-            margin: 0;
-            padding: 32px;
+            margin: 40px auto 0;
+            padding: 32px 20px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 20px;
@@ -393,6 +396,9 @@
             overflow: hidden;
             position: relative;
             min-height: 120px;
+            width: 100%;
+            max-width: 70%;
+            box-sizing: border-box;
         }
         
         .testimonials-title {
@@ -471,13 +477,16 @@
         
         /* Email Signup Form */
         .email-signup {
-            margin: 40px 0;
-            padding: 32px;
+            margin: 40px auto;
+            padding: 32px 20px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 70%;
+            box-sizing: border-box;
         }
         
         .email-signup h2 {
@@ -666,6 +675,23 @@
                 padding: 0 10px;
             }
             
+            .user-count {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .testimonials {
+                padding-top: 24px;
+                padding-bottom: 24px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .email-signup {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
             .email-form {
                 flex-direction: column;
             }
@@ -700,10 +726,6 @@
             
             nav a:not(:last-child)::after {
                 display: none;
-            }
-            
-            .testimonials {
-                padding: 24px;
             }
             
             .testimonial-text {
@@ -756,26 +778,6 @@
                 </a>
             </div>
             
-            <!-- Features Dropdown -->
-            <div class="dropdown-tabs">
-                <div class="dropdown-tab" id="featuresTab">
-                    <div class="dropdown-tab-header">
-                        Features
-                    </div>
-                    <div class="dropdown-tab-content">
-                        <div class="features">
-                            <ul>
-                                <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
-                                <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
-                                <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
-                                <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
-                                <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- User Count -->
             <div class="user-count">
                 Join <span class="number" id="userCount">...</span> users waiting for launch
@@ -806,6 +808,20 @@
                 <div id="signupMessage" class="email-message"></div>
             </div>
             
+            <!-- Testimonials Carousel (Standalone) -->
+            <div class="testimonials">
+                <div class="testimonials-title">
+                    <span class="star">⭐</span>
+                    What Users Are Saying
+                    <span class="star">⭐</span>
+                </div>
+                <div class="testimonials-carousel">
+                    <div class="testimonials-track" id="testimonialsTrack">
+                        <!-- Testimonials will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
             <!-- Dropdown Tabs Section -->
             <div class="dropdown-tabs">
                 <!-- Features Tab -->
@@ -819,30 +835,9 @@
                                 <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
                                 <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
                                 <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
-                                <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
-                                <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
+                                <li><span class="emoji">🚫</span> <span>Ad-free premium experience</span></li>
+                                <li><span class="emoji">⚡</span> <span>Near-Unlimited daily usage with premium tiers</span></li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonials Tab -->
-                <div class="dropdown-tab" id="testimonialsTab">
-                    <div class="dropdown-tab-header">
-                        Testimonials
-                    </div>
-                    <div class="dropdown-tab-content">
-                        <div class="testimonials">
-                            <div class="testimonials-title">
-                                <span class="star">⭐</span>
-                                What Users Are Saying
-                                <span class="star">⭐</span>
-                            </div>
-                            <div class="testimonials-carousel">
-                                <div class="testimonials-track" id="testimonialsTrack">
-                                    <!-- Testimonials will be inserted here -->
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -854,7 +849,26 @@
                     </div>
                     <div class="dropdown-tab-content">
                         <div class="faq-content">
-                            <p style="color: rgba(255, 255, 255, 0.9); padding: 20px 0;">Frequently asked questions will be added here.</p>
+                            <div class="faq-item">
+                                <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">When will Ember be available?</h3>
+                                <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 20px; line-height: 1.6;">We're currently in development and plan to launch soon! Sign up with your email to be notified as soon as we're available on iOS and Android.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">What makes Ember different from other apps?</h3>
+                                <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 20px; line-height: 1.6;">Ember uses AI to help you craft personalized responses that match your unique personality. With 9 different reply styles, smart date scheduling, and an ad-free experience, we make dating conversations effortless and authentic.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">Is Ember free to use?</h3>
+                                <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 20px; line-height: 1.6;">Ember offers a free tier with basic features, plus premium subscription tiers for near-unlimited daily usage and access to all reply styles and advanced features.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">Will my data be secure?</h3>
+                                <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 20px; line-height: 1.6;">Yes! We take your privacy seriously. All data is encrypted and securely stored. We share data only with trusted service providers necessary for app functionality: OpenAI for AI-powered response generation, and Supabase for secure backend services and data storage. We do not sell your personal information to third parties.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">Can I use Ember on both iOS and Android?</h3>
+                                <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 20px; line-height: 1.6;">Yes! Ember will be available on both iOS and Android devices at launch.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -949,9 +963,22 @@
             });
         }
 
-        // Initialize testimonials carousel
+        // Initialize testimonials carousel with infinite loop
         function initTestimonials() {
             const track = document.getElementById('testimonialsTrack');
+            
+            // Create testimonials (original set)
+            testimonials.forEach((testimonial, index) => {
+                const div = document.createElement('div');
+                div.className = 'testimonial';
+                div.innerHTML = `
+                    <p class="testimonial-text">${testimonial.text}</p>
+                    <div class="testimonial-author">— ${testimonial.author}</div>
+                `;
+                track.appendChild(div);
+            });
+            
+            // Clone testimonials for seamless looping
             testimonials.forEach((testimonial, index) => {
                 const div = document.createElement('div');
                 div.className = 'testimonial';
@@ -966,8 +993,29 @@
             const totalTestimonials = testimonials.length;
             
             function showNext() {
-                currentIndex = (currentIndex + 1) % totalTestimonials;
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                currentIndex++;
+                
+                // If we've reached the end of the original set, reset to start instantly
+                if (currentIndex >= totalTestimonials) {
+                    // Disable transition for instant reset
+                    track.style.transition = 'none';
+                    currentIndex = 0;
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    
+                    // Force reflow to ensure the reset happens
+                    void track.offsetHeight;
+                    
+                    // Re-enable transition and move to next slide
+                    requestAnimationFrame(() => {
+                        track.style.transition = 'transform 0.6s ease-in-out';
+                        currentIndex = 1;
+                        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    });
+                } else {
+                    // Normal transition
+                    track.style.transition = 'transform 0.6s ease-in-out';
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
             }
             
             // Auto-scroll every 5 seconds
