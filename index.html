@@ -23,192 +23,716 @@
         })();
     </script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            line-height: 1.6;
-            color: #333;
-        }
-        h1 { color: #ef4444; margin-bottom: 20px; }
-        p { margin: 15px 0; }
-        nav { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; }
-        a { color: #ef4444; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .social-link {
-            padding: 8px;
-            border-radius: 8px;
-            transition: background-color 0.2s, color 0.2s;
-            display: inline-flex;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ef4444, #dc2626);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 40px 20px;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
         }
-        .social-link:hover {
-            background-color: rgba(239, 68, 68, 0.1);
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .social-link:hover svg {
-            color: #ef4444;
+        
+        .container {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
         }
+        
+        /* Title with Logo */
+        .title-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+        }
+        
+        /* Feature Bullet Points */
+        .features {
+            margin: 32px 0;
+            text-align: left;
+            display: inline-block;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .features li .emoji {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .platforms {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        /* User Count */
+        .user-count {
+            margin: 24px 0;
+            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+        }
+        
+        .user-count .number {
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        /* QR Code Placeholder (Ember Banner) */
+        .qr-placeholder {
+            margin: 40px auto;
+            max-width: 300px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .qr-placeholder img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+        }
+        
+        .qr-label {
+            margin-top: 16px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        /* App Store Badges */
+        .app-badges {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+        
+        .app-badge {
+            height: 60px;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        
+        .app-badge:hover {
+            transform: translateY(-2px);
+        }
+        
+        .app-badge img {
+            height: 100%;
+            width: auto;
+        }
+        
+        /* Testimonials Carousel */
+        .testimonials {
+            margin: 40px 0;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            min-height: 120px;
+        }
+        
+        .testimonials-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #ffffff;
+        }
+        
+        .testimonials-carousel {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            will-change: transform;
+        }
+        
+        .testimonial {
+            min-width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            animation: fadeInTestimonial 0.6s ease-in forwards;
+        }
+        
+        @keyframes fadeInTestimonial {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .testimonial-text {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            font-style: italic;
+            quotes: '"' '"' "'" "'";
+        }
+        
+        .testimonial-text::before {
+            content: open-quote;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-right: 8px;
+        }
+        
+        .testimonial-text::after {
+            content: close-quote;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-left: 8px;
+        }
+        
+        /* Email Signup Form */
         .email-signup {
             margin: 40px 0;
-            padding: 30px;
-            background: #f9f9f9;
-            border-radius: 12px;
-            border: 1px solid #e5e5e5;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
+        
         .email-signup h2 {
             margin-top: 0;
-            color: #333;
-            font-size: 24px;
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-size: 1.75rem;
+            font-weight: 600;
         }
+        
         .email-signup p {
-            color: #666;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 24px;
+            font-size: 1rem;
         }
+        
         .email-form {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
+        
         .email-input {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            min-width: 200px;
+            padding: 14px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
             font-size: 16px;
             font-family: inherit;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            transition: all 0.2s;
         }
+        
         .email-input:focus {
             outline: none;
-            border-color: #ef4444;
+            border-color: rgba(255, 255, 255, 0.6);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
         }
+        
+        .email-input::placeholder {
+            color: #999;
+        }
+        
         .email-submit {
-            padding: 12px 24px;
-            background: #ef4444;
-            color: white;
+            padding: 14px 28px;
+            background: #ffffff;
+            color: #ef4444;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
             cursor: pointer;
             font-weight: 600;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
+        
         .email-submit:hover {
-            background: #dc2626;
+            background: #fef2f2;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
+        
+        .email-submit:active {
+            transform: translateY(0);
+        }
+        
         .email-submit:disabled {
-            background: #ccc;
+            background: rgba(255, 255, 255, 0.6);
             cursor: not-allowed;
+            transform: none;
         }
+        
         .email-message {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 12px;
             display: none;
+            font-size: 0.9375rem;
         }
+        
         .email-message.success {
-            background: #d1fae5;
-            color: #065f46;
+            background: rgba(16, 185, 129, 0.2);
+            color: #ffffff;
+            border: 1px solid rgba(16, 185, 129, 0.4);
             display: block;
         }
+        
         .email-message.error {
-            background: #fee2e2;
-            color: #991b1b;
+            background: rgba(239, 68, 68, 0.3);
+            color: #ffffff;
+            border: 1px solid rgba(239, 68, 68, 0.5);
             display: block;
+        }
+        
+        /* Social Media Links */
+        .social-links {
+            margin: 40px 0;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .social-link {
+            padding: 12px;
+            border-radius: 12px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .social-link svg {
+            color: #ffffff;
+            width: 22px;
+            height: 22px;
+        }
+        
+        /* Navigation */
+        nav {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+        
+        nav a:not(:last-child)::after {
+            content: '•';
+            margin-left: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .title-section {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .logo {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .email-form {
+                flex-direction: column;
+            }
+            
+            .email-submit {
+                width: 100%;
+            }
+            
+            .qr-placeholder {
+                max-width: 250px;
+                padding: 24px;
+            }
+            
+            .app-badges {
+                flex-direction: column;
+            }
+            
+            .app-badge {
+                height: 50px;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            nav a:not(:last-child)::after {
+                display: none;
+            }
+            
+            .testimonials {
+                padding: 24px;
+            }
+            
+            .testimonial-text {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Ember</h1>
-    <p>AI-powered dating assistant to help you navigate conversations and plan dates.</p>
-    <p>Available on iOS and Android.</p>
-    
-    <!-- Email Signup Form -->
-    <div class="email-signup">
-        <h2>Get Notified When We Launch</h2>
-        <p>Be the first to know when Ember is available on iOS and Android.</p>
+    <div class="container">
+        <!-- Title with Logo -->
+        <div class="title-section">
+            <img src="/ember-logo-v20.2-512px.png" alt="Ember Logo" class="logo" onerror="this.style.display='none';" />
+            <h1>Ember</h1>
+        </div>
         
-        <form id="emailSignupForm" class="email-form">
-            <input 
-                type="email" 
-                id="emailInput" 
-                class="email-input"
-                placeholder="Enter your email" 
-                required
+        <p class="subtitle">AI-powered dating assistant to help you navigate conversations and plan dates.</p>
+        
+        <!-- Feature Bullet Points -->
+        <div class="features">
+            <ul>
+                <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
+                <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
+                <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
+                <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
+                <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
+            </ul>
+        </div>
+        
+        <p class="platforms">Available on iOS and Android</p>
+        
+        <!-- User Count -->
+        <div class="user-count">
+            Join <span class="number" id="userCount">...</span> users waiting for launch
+        </div>
+        
+        <!-- QR Code Placeholder (Ember Banner) -->
+        <div class="qr-placeholder">
+            <img src="/ember banner.png" alt="Ember Banner - QR Code Placeholder" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding: 40px; text-align: center; color: rgba(255,255,255,0.8);\'>QR Code<br/><small>Coming Soon</small></div>';" />
+            <div class="qr-label">Scan to download</div>
+        </div>
+        
+        <!-- App Store Badges -->
+        <div class="app-badges">
+            <a href="#" class="app-badge" id="iosBadge" style="display: none;">
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" />
+            </a>
+            <a href="#" class="app-badge" id="androidBadge" style="display: none;">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 60px; width: auto;" />
+            </a>
+        </div>
+        
+        <!-- Testimonials Carousel -->
+        <div class="testimonials">
+            <div class="testimonials-title">What Users Are Saying</div>
+            <div class="testimonials-carousel">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- Testimonials will be inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Email Signup Form -->
+        <div class="email-signup">
+            <h2>Get Notified When We Launch</h2>
+            <p>Be the first to know when Ember is available on iOS and Android.</p>
+            
+            <form id="emailSignupForm" class="email-form">
+                <input 
+                    type="email" 
+                    id="emailInput" 
+                    class="email-input"
+                    placeholder="Enter your email" 
+                    required
+                >
+                <button 
+                    type="submit"
+                    id="emailSubmit"
+                    class="email-submit"
+                >
+                    Notify Me
+                </button>
+            </form>
+            
+            <div id="signupMessage" class="email-message"></div>
+        </div>
+        
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a
+                href="https://www.instagram.com/emberai.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                aria-label="Follow us on Instagram"
             >
-            <button 
-                type="submit"
-                id="emailSubmit"
-                class="email-submit"
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            
+            <a
+                href="https://www.tiktok.com/@emberai.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                aria-label="Follow us on TikTok"
             >
-                Notify Me
-            </button>
-        </form>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="8" cy="18" r="4"></circle>
+                    <path d="M12 18V2l7 4"></path>
+                </svg>
+            </a>
+            
+            <a
+                href="https://www.snapchat.com/add/emberai.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                aria-label="Add us on Snapchat"
+            >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 10h.01"></path>
+                    <path d="M15 10h.01"></path>
+                    <path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"></path>
+                </svg>
+            </a>
+        </div>
         
-        <div id="signupMessage" class="email-message"></div>
+        <!-- Navigation -->
+        <nav>
+            <a href="https://emberaidating.app/account-settings.html">Account Settings</a>
+            <a href="./support.html">Support</a>
+            <a href="./privacy.html">Privacy Policy</a>
+            <a href="./terms.html">Terms of Service</a>
+        </nav>
     </div>
-    
-    <!-- Social Media Links -->
-    <div style="margin: 30px 0; display: flex; gap: 16px; justify-content: center; align-items: center;">
-        <!-- Instagram -->
-        <a
-            href="https://www.instagram.com/emberai.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-            aria-label="Follow us on Instagram"
-        >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #666;">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-        </a>
-        
-        <!-- TikTok (Music icon) -->
-        <a
-            href="https://www.tiktok.com/@emberai.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-            aria-label="Follow us on TikTok"
-        >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: #666;">
-                <circle cx="8" cy="18" r="4"></circle>
-                <path d="M12 18V2l7 4"></path>
-            </svg>
-        </a>
-        
-        <!-- Snapchat (Ghost icon) -->
-        <a
-            href="https://www.snapchat.com/add/emberai.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-            aria-label="Add us on Snapchat"
-        >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: #666;">
-                <path d="M9 10h.01"></path>
-                <path d="M15 10h.01"></path>
-                <path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"></path>
-            </svg>
-        </a>
-    </div>
-    
-    <nav>
-        <a href="https://emberaidating.app/account-settings.html">Account Settings</a> | 
-        <a href="./support.html">Support</a> | 
-        <a href="./privacy.html">Privacy Policy</a> | 
-        <a href="./terms.html">Terms of Service</a>
-    </nav>
 
     <script>
         // Supabase configuration
-        // TODO: Replace with your Supabase anon key from Settings → API
         const SUPABASE_URL = 'https://prpdswqojiyzobqbtpgr.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBycGRzd3Fvaml5em9icWJ0cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5NDAwOTcsImV4cCI6MjA3NzUxNjA5N30.9BUmDHGsBVoOvjsyiefLEZGo1XCTQMJ-UEvQcRsEEjg'; // Get from Supabase Dashboard → Settings → API
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBycGRzd3Fvaml5em9icWJ0cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5NDAwOTcsImV4cCI6MjA3NzUxNjA5N30.9BUmDHGsBVoOvjsyiefLEZGo1XCTQMJ-UEvQcRsEEjg';
 
+        // Testimonials data
+        const testimonials = [
+            "This app really helps me balance my busy work/life schedule.",
+            "The stylized filters especially the creative, genuine responses really help me break the ice!",
+            "Choosing from different styles is a nice way to tailor your responses to your liking",
+            "Never Miss a date again.",
+            "I feel like this app is really needed in todays dating landscape where everyone is now meeting through dating apps",
+            "Life saver when I draw a blank, insightfully learning from the AI has improved my flirting skills in a creative way.",
+            "This is definitely making my dating life more efficient, hopefully to not too much of a crutch, haha.",
+            "This app originally helped me meet the absolute love of my life and current spouse Tyler! Who knew AI would be this useful?!"
+        ];
+
+        // Initialize testimonials carousel
+        function initTestimonials() {
+            const track = document.getElementById('testimonialsTrack');
+            testimonials.forEach((testimonial, index) => {
+                const div = document.createElement('div');
+                div.className = 'testimonial';
+                div.innerHTML = `<p class="testimonial-text">${testimonial}</p>`;
+                track.appendChild(div);
+            });
+            
+            let currentIndex = 0;
+            const totalTestimonials = testimonials.length;
+            
+            function showNext() {
+                currentIndex = (currentIndex + 1) % totalTestimonials;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            
+            // Auto-scroll every 5 seconds
+            setInterval(showNext, 5000);
+        }
+
+        // Fetch user count
+        async function fetchUserCount() {
+            try {
+                // Count email list subscribers (active)
+                const emailResponse = await fetch(`${SUPABASE_URL}/rest/v1/email_list?is_active=eq.true&select=id`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Range': '0-0',
+                        'Prefer': 'count=exact'
+                    }
+                });
+                const emailCount = parseInt(emailResponse.headers.get('content-range')?.split('/')[1] || '0');
+
+                // Count profiles (users) - may be restricted by RLS, so we'll try
+                let profilesCount = 0;
+                try {
+                    const profilesResponse = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=id`, {
+                        headers: {
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Range': '0-0',
+                            'Prefer': 'count=exact'
+                        }
+                    });
+                    profilesCount = parseInt(profilesResponse.headers.get('content-range')?.split('/')[1] || '0');
+                } catch (e) {
+                    // RLS might block this, that's okay
+                    console.log('Profiles count not available (RLS restriction)');
+                }
+
+                // Count active subscriptions - may be restricted by RLS
+                let subsCount = 0;
+                try {
+                    const subsResponse = await fetch(`${SUPABASE_URL}/rest/v1/subscriptions?status=eq.active&select=id`, {
+                        headers: {
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Range': '0-0',
+                            'Prefer': 'count=exact'
+                        }
+                    });
+                    subsCount = parseInt(subsResponse.headers.get('content-range')?.split('/')[1] || '0');
+                } catch (e) {
+                    // RLS might block this, that's okay
+                    console.log('Subscriptions count not available (RLS restriction)');
+                }
+
+                // Total count (email list is always accessible, others may be 0 due to RLS)
+                const total = emailCount + profilesCount + subsCount;
+                if (total > 0) {
+                    document.getElementById('userCount').textContent = total.toLocaleString();
+                } else {
+                    // Fallback if counts aren't available
+                    document.getElementById('userCount').textContent = 'hundreds of';
+                }
+            } catch (error) {
+                console.error('Error fetching user count:', error);
+                document.getElementById('userCount').textContent = 'hundreds of';
+            }
+        }
+
+        // Email signup form handler
         document.getElementById('emailSignupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -249,6 +773,8 @@
                     messageDiv.textContent = '✅ Thanks! We\'ll notify you when we launch.';
                     messageDiv.className = 'email-message success';
                     emailInput.value = '';
+                    // Update user count
+                    fetchUserCount();
                 } else {
                     throw new Error(result.message || 'Something went wrong');
                 }
@@ -261,6 +787,12 @@
                 submitButton.disabled = false;
                 submitButton.textContent = 'Notify Me';
             }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initTestimonials();
+            fetchUserCount();
         });
     </script>
 </body>
