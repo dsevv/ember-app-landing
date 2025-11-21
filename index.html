@@ -985,25 +985,27 @@
         
         /* Scroll to Top Button */
         .scroll-to-top {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 52px;
-            height: 52px;
-            background: rgba(239, 68, 68, 0.9);
+            position: fixed !important;
+            bottom: 40px !important;
+            right: 40px !important;
+            width: 52px !important;
+            height: 52px !important;
+            background: rgba(239, 68, 68, 0.9) !important;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 9999;
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            z-index: 999999 !important;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         
         .scroll-to-top.visible {
@@ -1520,10 +1522,17 @@
             
             // Show/hide button based on scroll position
             function toggleScrollButton() {
-                if (window.scrollY > 200) {
+                const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollY > 200) {
                     scrollButton.classList.add('visible');
+                    scrollButton.style.opacity = '1';
+                    scrollButton.style.visibility = 'visible';
+                    scrollButton.style.pointerEvents = 'auto';
                 } else {
                     scrollButton.classList.remove('visible');
+                    scrollButton.style.opacity = '0';
+                    scrollButton.style.visibility = 'hidden';
+                    scrollButton.style.pointerEvents = 'none';
                 }
             }
             
