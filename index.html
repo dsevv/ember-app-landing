@@ -394,19 +394,23 @@
             object-fit: contain;
         }
         
-        /* Ensure Google Play badge matches App Store badge size */
+        /* Force both badges to exact same size */
         #androidBadge,
-        #androidBadge img {
+        #iosBadge {
             height: 60px !important;
             min-height: 60px !important;
-            width: auto !important;
+            max-height: 60px !important;
+            display: flex !important;
+            align-items: center !important;
         }
         
-        /* Force same dimensions for both badges */
-        #iosBadge,
+        #androidBadge img,
         #iosBadge img {
-            height: 60px;
-            min-height: 60px;
+            height: 60px !important;
+            min-height: 60px !important;
+            max-height: 60px !important;
+            width: auto !important;
+            object-fit: contain !important;
         }
         
         /* Testimonials Carousel */
@@ -703,13 +707,13 @@
             
             .dropdown-tabs {
                 padding: 0 10px;
-                max-width: 95%;
+                max-width: 100%;
             }
             
             .user-count {
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 90%;
+                max-width: 95%;
             }
             
             .testimonials {
@@ -717,13 +721,13 @@
                 padding-bottom: 24px;
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 80%;
+                max-width: 100%;
             }
             
             .email-signup {
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 80%;
+                max-width: 100%;
             }
             
             .email-form {
@@ -759,16 +763,21 @@
             
             /* Force same dimensions for both badges on mobile */
             #androidBadge,
-            #androidBadge img {
+            #iosBadge {
                 height: 50px !important;
                 min-height: 50px !important;
-                width: auto !important;
+                max-height: 50px !important;
+                display: flex !important;
+                align-items: center !important;
             }
             
-            #iosBadge,
+            #androidBadge img,
             #iosBadge img {
                 height: 50px !important;
                 min-height: 50px !important;
+                max-height: 50px !important;
+                width: auto !important;
+                object-fit: contain !important;
             }
             
             nav {
