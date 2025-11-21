@@ -50,12 +50,104 @@
         .social-link:hover svg {
             color: #ef4444;
         }
+        .email-signup {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+        }
+        .email-signup h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+        }
+        .email-signup p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .email-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .email-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .email-input:focus {
+            outline: none;
+            border-color: #ef4444;
+        }
+        .email-submit {
+            padding: 12px 24px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .email-submit:hover {
+            background: #dc2626;
+        }
+        .email-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .email-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+        .email-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            display: block;
+        }
+        .email-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <h1>Ember</h1>
     <p>AI-powered dating assistant to help you navigate conversations and plan dates.</p>
     <p>Available on iOS and Android.</p>
+    
+    <!-- Email Signup Form -->
+    <div class="email-signup">
+        <h2>Get Notified When We Launch</h2>
+        <p>Be the first to know when Ember is available on iOS and Android.</p>
+        
+        <form id="emailSignupForm" class="email-form">
+            <input 
+                type="email" 
+                id="emailInput" 
+                class="email-input"
+                placeholder="Enter your email" 
+                required
+            >
+            <button 
+                type="submit"
+                id="emailSubmit"
+                class="email-submit"
+            >
+                Notify Me
+            </button>
+        </form>
+        
+        <div id="signupMessage" class="email-message"></div>
+    </div>
     
     <!-- Social Media Links -->
     <div style="margin: 30px 0; display: flex; gap: 16px; justify-content: center; align-items: center;">
@@ -110,5 +202,66 @@
         <a href="./privacy.html">Privacy Policy</a> | 
         <a href="./terms.html">Terms of Service</a>
     </nav>
+
+    <script>
+        // Supabase configuration
+        // TODO: Replace with your Supabase anon key from Settings → API
+        const SUPABASE_URL = 'https://prpdswqojiyzobqbtpgr.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBycGRzd3Fvaml5em9icWJ0cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5NDAwOTcsImV4cCI6MjA3NzUxNjA5N30.9BUmDHGsBVoOvjsyiefLEZGo1XCTQMJ-UEvQcRsEEjg'; // Get from Supabase Dashboard → Settings → API
+
+        document.getElementById('emailSignupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('emailInput');
+            const messageDiv = document.getElementById('signupMessage');
+            const submitButton = document.getElementById('emailSubmit');
+            const email = emailInput.value.trim();
+            
+            // Basic email validation
+            if (!email || !email.includes('@')) {
+                messageDiv.textContent = 'Please enter a valid email address.';
+                messageDiv.className = 'email-message error';
+                return;
+            }
+            
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.textContent = 'Subscribing...';
+            
+            try {
+                // Call Supabase function
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/subscribe_to_email_list`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify({
+                        p_email: email,
+                        p_source: 'landing_page'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    messageDiv.textContent = '✅ Thanks! We\'ll notify you when we launch.';
+                    messageDiv.className = 'email-message success';
+                    emailInput.value = '';
+                } else {
+                    throw new Error(result.message || 'Something went wrong');
+                }
+            } catch (error) {
+                console.error('Signup error:', error);
+                messageDiv.textContent = '❌ Something went wrong. Please try again.';
+                messageDiv.className = 'email-message error';
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Notify Me';
+            }
+        });
+    </script>
 </body>
 </html>
