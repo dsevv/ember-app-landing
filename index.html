@@ -143,16 +143,12 @@
             z-index: 1;
         }
         
-        /* Content Overlay - Between Dividers */
-        .content-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Content Container - Between Dividers */
+        .content-between-dividers {
+            position: relative;
             width: 100%;
-            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
             z-index: 0;
-            pointer-events: none;
-            transition: background 0.3s ease;
         }
         
         /* Video Background Container */
@@ -688,9 +684,6 @@
     <!-- Retro/Vintage Overlay -->
     <div class="video-overlay"></div>
     
-    <!-- Content Overlay - Between Dividers -->
-    <div class="content-overlay"></div>
-    
     <div class="container">
         <!-- Title with Logo -->
         <div class="title-section">
@@ -706,84 +699,86 @@
         <!-- Title Divider -->
         <div class="title-divider"></div>
         
-        <!-- Dropdown Tabs -->
-        <div class="dropdown-tabs">
-            <!-- Features Dropdown -->
-            <div class="dropdown-tab" id="featuresTab">
-                <div class="dropdown-tab-header">
-                    Features
-                </div>
-                <div class="dropdown-tab-content">
-                    <div class="features">
-                        <ul>
-                            <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
-                            <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
-                            <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
-                            <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
-                            <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
-                        </ul>
+        <!-- Content Container Between Dividers -->
+        <div class="content-between-dividers">
+            <!-- Dropdown Tabs -->
+            <div class="dropdown-tabs">
+                <!-- Features Dropdown -->
+                <div class="dropdown-tab" id="featuresTab">
+                    <div class="dropdown-tab-header">
+                        Features
+                    </div>
+                    <div class="dropdown-tab-content">
+                        <div class="features">
+                            <ul>
+                                <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
+                                <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
+                                <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
+                                <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
+                                <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
             
-        </div>
-        
-        <!-- App Store Badges -->
-        <div class="app-badges">
-            <a href="#" class="app-badge" id="iosBadge" title="Coming soon to App Store">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" onerror="this.parentElement.style.display='none';" />
-            </a>
-            <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" onerror="this.parentElement.style.display='none';" />
-            </a>
-        </div>
-        
-        <!-- User Count -->
-        <div class="user-count">
-            Join <span class="number" id="userCount">...</span> users waiting for launch
-        </div>
-        
-        <!-- Email Signup Form -->
-        <div class="email-signup">
-            <h2>Get Notified When We Launch</h2>
-            <p>Be the first to know when Ember is available on iOS and Android.</p>
+            <!-- App Store Badges -->
+            <div class="app-badges">
+                <a href="#" class="app-badge" id="iosBadge" title="Coming soon to App Store">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" onerror="this.parentElement.style.display='none';" />
+                </a>
+                <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" onerror="this.parentElement.style.display='none';" />
+                </a>
+            </div>
             
-            <form id="emailSignupForm" class="email-form">
-                <input 
-                    type="email" 
-                    id="emailInput" 
-                    class="email-input"
-                    placeholder="Enter your email" 
-                    required
-                >
-                <button 
-                    type="submit"
-                    id="emailSubmit"
-                    class="email-submit"
-                >
-                    Notify Me
-                </button>
-            </form>
+            <!-- User Count -->
+            <div class="user-count">
+                Join <span class="number" id="userCount">...</span> users waiting for launch
+            </div>
             
-            <div id="signupMessage" class="email-message"></div>
-        </div>
-        
-        <!-- Testimonials Dropdown -->
-        <div class="dropdown-tabs">
-            <div class="dropdown-tab" id="testimonialsTab">
-                <div class="dropdown-tab-header">
-                    Testimonials
-                </div>
-                <div class="dropdown-tab-content">
-                    <div class="testimonials">
-                        <div class="testimonials-title">
-                            <span class="star">⭐</span>
-                            What Users Are Saying
-                            <span class="star">⭐</span>
-                        </div>
-                        <div class="testimonials-carousel">
-                            <div class="testimonials-track" id="testimonialsTrack">
-                                <!-- Testimonials will be inserted here -->
+            <!-- Email Signup Form -->
+            <div class="email-signup">
+                <h2>Get Notified When We Launch</h2>
+                <p>Be the first to know when Ember is available on iOS and Android.</p>
+                
+                <form id="emailSignupForm" class="email-form">
+                    <input 
+                        type="email" 
+                        id="emailInput" 
+                        class="email-input"
+                        placeholder="Enter your email" 
+                        required
+                    >
+                    <button 
+                        type="submit"
+                        id="emailSubmit"
+                        class="email-submit"
+                    >
+                        Notify Me
+                    </button>
+                </form>
+                
+                <div id="signupMessage" class="email-message"></div>
+            </div>
+            
+            <!-- Testimonials Dropdown -->
+            <div class="dropdown-tabs">
+                <div class="dropdown-tab" id="testimonialsTab">
+                    <div class="dropdown-tab-header">
+                        Testimonials
+                    </div>
+                    <div class="dropdown-tab-content">
+                        <div class="testimonials">
+                            <div class="testimonials-title">
+                                <span class="star">⭐</span>
+                                What Users Are Saying
+                                <span class="star">⭐</span>
+                            </div>
+                            <div class="testimonials-carousel">
+                                <div class="testimonials-track" id="testimonialsTrack">
+                                    <!-- Testimonials will be inserted here -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1009,41 +1004,6 @@
             }
         }
 
-        // Update overlay position based on actual divider positions
-        function updateOverlayPosition() {
-            const titleDivider = document.querySelector('.title-divider');
-            const nav = document.querySelector('nav');
-            const overlay = document.querySelector('.content-overlay');
-            
-            if (!titleDivider || !nav || !overlay) return;
-            
-            // Get positions relative to viewport
-            const titleDividerRect = titleDivider.getBoundingClientRect();
-            const navRect = nav.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            const documentHeight = Math.max(
-                document.body.scrollHeight,
-                document.body.offsetHeight,
-                document.documentElement.clientHeight,
-                document.documentElement.scrollHeight,
-                document.documentElement.offsetHeight
-            );
-            
-            // Calculate positions as percentages of viewport
-            const startPercent = (titleDividerRect.top / viewportHeight) * 100;
-            const endPercent = (navRect.top / viewportHeight) * 100;
-            
-            // Create gradient that starts at title divider and ends at nav
-            overlay.style.background = `linear-gradient(
-                to bottom,
-                transparent 0%,
-                transparent ${Math.max(0, startPercent - 1)}%,
-                rgba(0, 0, 0, 0.7) ${Math.max(0, startPercent - 1)}%,
-                rgba(0, 0, 0, 0.7) ${Math.min(100, endPercent + 1)}%,
-                transparent ${Math.min(100, endPercent + 1)}%,
-                transparent 100%
-            )`;
-        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
@@ -1051,35 +1011,6 @@
             initDropdownTabs();
             initTestimonials();
             fetchUserCount();
-            
-            // Initial overlay position
-            setTimeout(updateOverlayPosition, 100);
-            
-            // Update on resize and scroll
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(updateOverlayPosition, 100);
-            });
-            
-            // Update when dropdowns open/close (after animation)
-            const tabs = document.querySelectorAll('.dropdown-tab');
-            tabs.forEach(tab => {
-                const header = tab.querySelector('.dropdown-tab-header');
-                if (header) {
-                    header.addEventListener('click', () => {
-                        // Wait for dropdown animation to complete
-                        setTimeout(updateOverlayPosition, 400);
-                    });
-                }
-            });
-            
-            // Update on scroll (throttled)
-            let scrollTimeout;
-            window.addEventListener('scroll', () => {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(updateOverlayPosition, 50);
-            });
         });
     </script>
 </body>
