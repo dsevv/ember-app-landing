@@ -373,9 +373,12 @@
         
         .app-badge {
             height: 60px;
+            width: auto;
             transition: transform 0.2s;
             cursor: pointer;
             opacity: 0.7;
+            display: flex;
+            align-items: center;
         }
         
         .app-badge:hover {
@@ -386,7 +389,15 @@
         .app-badge img {
             height: 60px;
             width: auto;
+            min-height: 60px;
             display: block;
+            object-fit: contain;
+        }
+        
+        /* Ensure Google Play badge matches App Store badge size */
+        #androidBadge img {
+            height: 60px !important;
+            width: auto !important;
         }
         
         /* Testimonials Carousel */
@@ -722,7 +733,8 @@
             }
             
             .app-badges {
-                flex-direction: column;
+                flex-direction: row;
+                gap: 12px;
             }
             
             .app-badge {
@@ -731,6 +743,12 @@
             
             .app-badge img {
                 height: 50px;
+                min-height: 50px;
+            }
+            
+            #androidBadge img {
+                height: 50px !important;
+                width: auto !important;
             }
             
             nav {
