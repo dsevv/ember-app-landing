@@ -149,6 +149,32 @@
             width: 100%;
             background: rgba(0, 0, 0, 0.3);
             z-index: 0;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        
+        /* QR Code Placeholder (Ember Banner) */
+        .qr-placeholder {
+            margin: 40px auto;
+            max-width: 300px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .qr-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            text-align: center;
         }
         
         /* Video Background Container */
@@ -494,8 +520,8 @@
         
         .email-submit {
             padding: 14px 28px;
-            background: #ffffff;
-            color: #ef4444;
+            background: #ef4444;
+            color: #ffffff;
             border: none;
             border-radius: 12px;
             font-size: 16px;
@@ -507,7 +533,7 @@
         }
         
         .email-submit:hover {
-            background: #fef2f2;
+            background: #dc2626;
             transform: translateY(-1px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
@@ -517,7 +543,7 @@
         }
         
         .email-submit:disabled {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(239, 68, 68, 0.6);
             cursor: not-allowed;
             transform: none;
         }
@@ -641,6 +667,12 @@
                 width: 100%;
             }
             
+            .qr-placeholder {
+                max-width: 250px;
+                padding: 24px;
+                min-height: 150px;
+            }
+            
             .app-badges {
                 flex-direction: column;
             }
@@ -720,6 +752,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- QR Code Placeholder (Ember Banner) -->
+            <div class="qr-placeholder">
+                <div class="qr-label">QR Code<br/><small>Coming Soon</small></div>
             </div>
             
             <!-- App Store Badges -->
