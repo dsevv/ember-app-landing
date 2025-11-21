@@ -395,9 +395,18 @@
         }
         
         /* Ensure Google Play badge matches App Store badge size */
+        #androidBadge,
         #androidBadge img {
             height: 60px !important;
+            min-height: 60px !important;
             width: auto !important;
+        }
+        
+        /* Force same dimensions for both badges */
+        #iosBadge,
+        #iosBadge img {
+            height: 60px;
+            min-height: 60px;
         }
         
         /* Testimonials Carousel */
@@ -694,7 +703,7 @@
             
             .dropdown-tabs {
                 padding: 0 10px;
-                max-width: 90%;
+                max-width: 95%;
             }
             
             .user-count {
@@ -708,13 +717,13 @@
                 padding-bottom: 24px;
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 75%;
+                max-width: 80%;
             }
             
             .email-signup {
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 75%;
+                max-width: 80%;
             }
             
             .email-form {
@@ -739,16 +748,27 @@
             
             .app-badge {
                 height: 50px;
+                min-height: 50px;
             }
             
             .app-badge img {
                 height: 50px;
                 min-height: 50px;
+                width: auto;
             }
             
+            /* Force same dimensions for both badges on mobile */
+            #androidBadge,
             #androidBadge img {
                 height: 50px !important;
+                min-height: 50px !important;
                 width: auto !important;
+            }
+            
+            #iosBadge,
+            #iosBadge img {
+                height: 50px !important;
+                min-height: 50px !important;
             }
             
             nav {
@@ -803,11 +823,11 @@
             
             <!-- App Store Badges -->
             <div class="app-badges">
-                <a href="#" class="app-badge" id="iosBadge" title="Coming soon to App Store">
-                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" onerror="this.parentElement.style.display='none';" />
+                <a href="#" class="app-badge" id="iosBadge" title="Coming soon to App Store" style="height: 60px; min-height: 60px;">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" style="height: 60px !important; min-height: 60px !important; width: auto !important; display: block;" onerror="this.parentElement.style.display='none';" />
                 </a>
-                <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" onerror="this.parentElement.style.display='none';" />
+                <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play" style="height: 60px; min-height: 60px;">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 60px !important; min-height: 60px !important; width: auto !important; display: block;" onerror="this.parentElement.style.display='none';" />
                 </a>
             </div>
             
