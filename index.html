@@ -43,7 +43,48 @@
             opacity: 0;
             animation: fadeIn 0.8s ease-in forwards;
             overflow-x: hidden;
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
+        
+        /* Allow text input to be selectable */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+        
+        /* Retro/Vintage Overlay */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                linear-gradient(180deg, rgba(239, 68, 68, 0.1) 0%, transparent 50%, rgba(220, 38, 38, 0.1) 100%),
+                radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        
         
         @keyframes fadeIn {
             from {
@@ -56,12 +97,6 @@
             }
         }
         
-        .container {
-            max-width: 700px;
-            width: 100%;
-            text-align: center;
-            padding-bottom: 20px;
-        }
         
         /* Title with Logo */
         .title-section {
@@ -97,11 +132,156 @@
             font-weight: 400;
         }
         
+        /* Title Section Divider */
+        .title-divider {
+            margin: 32px auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Content Overlay - Between Dividers */
+        .content-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                transparent 18%,
+                rgba(0, 0, 0, 0.6) 18%,
+                rgba(0, 0, 0, 0.6) 88%,
+                transparent 88%,
+                transparent 100%
+            );
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        /* Video Background Container */
+        .video-background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .video-background-wrapper video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            opacity: 0.25;
+        }
+        
+        /* Retro/Vintage Overlay */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                linear-gradient(180deg, rgba(239, 68, 68, 0.1) 0%, transparent 30%, transparent 70%, rgba(220, 38, 38, 0.1) 100%),
+                radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.15) 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        
+        /* Ensure content is above video and overlay */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        
+        /* Content wrapper to position overlay correctly */
+        .content-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        /* Dropdown Tabs */
+        .dropdown-tabs {
+            margin: 32px 0;
+            width: 100%;
+            max-width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
+        .dropdown-tab {
+            margin-bottom: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        
+        .dropdown-tab-header {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            transition: background-color 0.2s;
+        }
+        
+        .dropdown-tab-header:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dropdown-tab-header::after {
+            content: '▼';
+            font-size: 0.875rem;
+            transition: transform 0.3s;
+        }
+        
+        .dropdown-tab.active .dropdown-tab-header::after {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-tab-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 24px;
+        }
+        
+        .dropdown-tab.active .dropdown-tab-content {
+            max-height: 1000px;
+            padding: 0 24px 24px;
+        }
+        
         /* Feature Bullet Points */
         .features {
-            margin: 32px 0;
             text-align: left;
             display: inline-block;
+            width: 100%;
         }
         
         .features ul {
@@ -110,7 +290,7 @@
         }
         
         .features li {
-            padding: 8px 0;
+            padding: 12px 0;
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.95);
             display: flex;
@@ -197,14 +377,14 @@
         }
         
         .app-badge img {
-            height: 100%;
+            height: 60px;
             width: auto;
             display: block;
         }
         
         /* Testimonials Carousel */
         .testimonials {
-            margin: 40px 0;
+            margin: 0;
             padding: 32px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
@@ -221,6 +401,14 @@
             font-weight: 600;
             margin-bottom: 24px;
             color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .testimonials-title .star {
+            font-size: 1.25rem;
         }
         
         .testimonials-carousel {
@@ -257,6 +445,7 @@
             color: rgba(255, 255, 255, 0.95);
             font-style: italic;
             quotes: '"' '"' "'" "'";
+            margin-bottom: 12px;
         }
         
         .testimonial-text::before {
@@ -271,6 +460,14 @@
             font-size: 2rem;
             color: rgba(255, 255, 255, 0.6);
             margin-left: 8px;
+        }
+        
+        .testimonial-author {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: normal;
+            margin-top: 12px;
+            text-align: right;
         }
         
         /* Email Signup Form */
@@ -445,6 +642,7 @@
             color: rgba(255, 255, 255, 0.4);
         }
         
+        
         /* Responsive */
         @media (max-width: 640px) {
             h1 {
@@ -463,6 +661,10 @@
             
             .subtitle {
                 font-size: 1.125rem;
+            }
+            
+            .dropdown-tabs {
+                padding: 0 10px;
             }
             
             .email-form {
@@ -486,6 +688,10 @@
                 height: 50px;
             }
             
+            .app-badge img {
+                height: 50px;
+            }
+            
             nav {
                 flex-direction: column;
                 gap: 8px;
@@ -506,6 +712,20 @@
     </style>
 </head>
 <body>
+    <!-- Video Background -->
+    <div class="video-background-wrapper">
+        <video autoplay muted loop playsinline>
+            <source src="./Embers vfx(1).mov" type="video/quicktime">
+            <source src="./Embers vfx(1).mov" type="video/mp4">
+        </video>
+    </div>
+    
+    <!-- Retro/Vintage Overlay -->
+    <div class="video-overlay"></div>
+    
+    <!-- Content Overlay - Between Dividers -->
+    <div class="content-overlay"></div>
+    
     <div class="container">
         <!-- Title with Logo -->
         <div class="title-section">
@@ -516,18 +736,52 @@
         
         <p class="subtitle">AI-powered dating assistant to help you navigate conversations and plan dates.</p>
         
-        <!-- Feature Bullet Points -->
-        <div class="features">
-            <ul>
-                <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
-                <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
-                <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
-                <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
-                <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
-            </ul>
-        </div>
-        
         <p class="platforms">Available on iOS and Android</p>
+        
+        <!-- Title Divider -->
+        <div class="title-divider"></div>
+        
+        <!-- Dropdown Tabs -->
+        <div class="dropdown-tabs">
+            <!-- Features Dropdown -->
+            <div class="dropdown-tab" id="featuresTab">
+                <div class="dropdown-tab-header">
+                    Features
+                </div>
+                <div class="dropdown-tab-content">
+                    <div class="features">
+                        <ul>
+                            <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
+                            <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
+                            <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
+                            <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
+                            <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials Dropdown -->
+            <div class="dropdown-tab" id="testimonialsTab">
+                <div class="dropdown-tab-header">
+                    Testimonials
+                </div>
+                <div class="dropdown-tab-content">
+                    <div class="testimonials">
+                        <div class="testimonials-title">
+                            <span class="star">⭐</span>
+                            What Users Are Saying
+                            <span class="star">⭐</span>
+                        </div>
+                        <div class="testimonials-carousel">
+                            <div class="testimonials-track" id="testimonialsTrack">
+                                <!-- Testimonials will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <!-- QR Code Placeholder (Ember Banner) -->
         <div class="qr-placeholder">
@@ -542,18 +796,8 @@
                 <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" onerror="this.parentElement.style.display='none';" />
             </a>
             <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 60px; width: auto;" onerror="this.parentElement.style.display='none';" />
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" onerror="this.parentElement.style.display='none';" />
             </a>
-        </div>
-        
-        <!-- Testimonials Carousel -->
-        <div class="testimonials">
-            <div class="testimonials-title">What Users Are Saying</div>
-            <div class="testimonials-carousel">
-                <div class="testimonials-track" id="testimonialsTrack">
-                    <!-- Testimonials will be inserted here -->
-                </div>
-            </div>
         </div>
         
         <!-- User Count -->
@@ -637,6 +881,7 @@
             <a href="./privacy.html">Privacy Policy</a>
             <a href="./terms.html">Terms of Service</a>
         </nav>
+        </div>
     </div>
 
     <script>
@@ -644,17 +889,34 @@
         const SUPABASE_URL = 'https://prpdswqojiyzobqbtpgr.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBycGRzd3Fvaml5em9icWJ0cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5NDAwOTcsImV4cCI6MjA3NzUxNjA5N30.9BUmDHGsBVoOvjsyiefLEZGo1XCTQMJ-UEvQcRsEEjg';
 
-        // Testimonials data
+        // Testimonials data with names
         const testimonials = [
-            "This app really helps me balance my busy work/life schedule.",
-            "The stylized filters especially the creative, genuine responses really help me break the ice!",
-            "Choosing from different styles is a nice way to tailor your responses to your liking",
-            "Never Miss a date again.",
-            "I feel like this app is really needed in todays dating landscape where everyone is now meeting through dating apps",
-            "Life saver when I draw a blank, insightfully learning from the AI has improved my flirting skills in a creative way.",
-            "This is definitely making my dating life more efficient, hopefully to not too much of a crutch, haha.",
-            "This app originally helped me meet the absolute love of my life and current spouse Tyler! Who knew AI would be this useful?!"
+            { text: "This app really helps me balance my busy work/life schedule.", author: "Sarah" },
+            { text: "The stylized filters especially the creative, genuine responses really help me break the ice!", author: "M. Johnson" },
+            { text: "Choosing from different styles is a nice way to tailor your responses to your liking", author: "Alex" },
+            { text: "Never Miss a date again.", author: "J. R." },
+            { text: "I feel like this app is really needed in todays dating landscape where everyone is now meeting through dating apps", author: "Ava" },
+            { text: "Life saver when I draw a blank, insightfully learning from the AI has improved my flirting skills in a creative way.", author: "Chris" },
+            { text: "This is definitely making my dating life more efficient, hopefully to not too much of a crutch, haha.", author: "T. Reyes" },
+            { text: "This app originally helped me meet the absolute love of my life and current spouse Tyler! Who knew AI would be this useful?!", author: "Nina" }
         ];
+
+        // Initialize dropdown tabs
+        function initDropdownTabs() {
+            const tabs = document.querySelectorAll('.dropdown-tab');
+            tabs.forEach(tab => {
+                const header = tab.querySelector('.dropdown-tab-header');
+                header.addEventListener('click', () => {
+                    const isActive = tab.classList.contains('active');
+                    // Close all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Open clicked tab if it wasn't active
+                    if (!isActive) {
+                        tab.classList.add('active');
+                    }
+                });
+            });
+        }
 
         // Initialize testimonials carousel
         function initTestimonials() {
@@ -662,7 +924,10 @@
             testimonials.forEach((testimonial, index) => {
                 const div = document.createElement('div');
                 div.className = 'testimonial';
-                div.innerHTML = `<p class="testimonial-text">${testimonial}</p>`;
+                div.innerHTML = `
+                    <p class="testimonial-text">${testimonial.text}</p>
+                    <div class="testimonial-author">— ${testimonial.author}</div>
+                `;
                 track.appendChild(div);
             });
             
@@ -681,11 +946,6 @@
         // Fetch user count - SAFE: Only returns count, no personal data exposed
         async function fetchUserCount() {
             try {
-                // Use Supabase function to get count (safe - only returns number)
-                // This is secure because:
-                // 1. Function only returns COUNT, not personal data
-                // 2. No email addresses or user info exposed
-                // 3. RLS policies still protect the underlying data
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_email_list_count`, {
                     method: 'POST',
                     headers: {
@@ -703,12 +963,10 @@
                         document.getElementById('userCount').textContent = 'hundreds of';
                     }
                 } else {
-                    // Fallback if function doesn't exist yet
                     document.getElementById('userCount').textContent = 'hundreds of';
                 }
             } catch (error) {
                 console.error('Error fetching user count:', error);
-                // Safe fallback - doesn't expose any data
                 document.getElementById('userCount').textContent = 'hundreds of';
             }
         }
@@ -722,19 +980,16 @@
             const submitButton = document.getElementById('emailSubmit');
             const email = emailInput.value.trim();
             
-            // Basic email validation
             if (!email || !email.includes('@')) {
                 messageDiv.textContent = 'Please enter a valid email address.';
                 messageDiv.className = 'email-message error';
                 return;
             }
             
-            // Disable submit button
             submitButton.disabled = true;
             submitButton.textContent = 'Subscribing...';
             
             try {
-                // Call Supabase function
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/subscribe_to_email_list`, {
                     method: 'POST',
                     headers: {
@@ -754,7 +1009,6 @@
                     messageDiv.textContent = '✅ Thanks! We\'ll notify you when we launch.';
                     messageDiv.className = 'email-message success';
                     emailInput.value = '';
-                    // Update user count
                     fetchUserCount();
                 } else {
                     throw new Error(result.message || 'Something went wrong');
@@ -764,7 +1018,6 @@
                 messageDiv.textContent = '❌ Something went wrong. Please try again.';
                 messageDiv.className = 'email-message error';
             } finally {
-                // Re-enable submit button
                 submitButton.disabled = false;
                 submitButton.textContent = 'Notify Me';
             }
@@ -775,7 +1028,6 @@
             const logo = document.querySelector('.logo');
             const banner = document.querySelector('.qr-placeholder img');
             
-            // Try different paths for logo (GitHub Pages compatible)
             if (logo) {
                 const logoPaths = [
                     './ember-logo-v20.2-512px.png',
@@ -796,7 +1048,6 @@
                 };
             }
             
-            // Try different paths for banner (GitHub Pages compatible)
             if (banner) {
                 const bannerPaths = [
                     './ember banner.png',
@@ -822,6 +1073,7 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             fixImagePaths();
+            initDropdownTabs();
             initTestimonials();
             fetchUserCount();
         });
