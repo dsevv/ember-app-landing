@@ -130,6 +130,7 @@
             margin-bottom: 24px;
             color: rgba(255, 255, 255, 0.95);
             font-weight: 400;
+            font-style: italic;
         }
         
         /* Title Section Divider */
@@ -985,54 +986,61 @@
         /* Scroll to Top Button */
         .scroll-to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
+            bottom: 40px;
+            right: 40px;
+            width: 52px;
+            height: 52px;
             background: rgba(239, 68, 68, 0.9);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             z-index: 9999;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
         
         .scroll-to-top.visible {
-            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
         
         .scroll-to-top:hover {
             background: rgba(239, 68, 68, 1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
         .scroll-to-top:active {
-            transform: translateY(0);
+            transform: translateY(-2px) scale(1.02);
         }
         
         .scroll-to-top-icon {
             color: #ffffff;
-            font-size: 20px;
-            font-weight: bold;
-            line-height: 1;
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
         }
         
         @media (max-width: 640px) {
             .scroll-to-top {
-                width: 44px;
-                height: 44px;
-                bottom: 16px;
-                right: 16px;
+                width: 48px;
+                height: 48px;
+                bottom: 30px;
+                right: 30px;
             }
             
             .scroll-to-top-icon {
-                font-size: 18px;
+                width: 22px;
+                height: 22px;
             }
         }
     </style>
@@ -1040,7 +1048,10 @@
 <body>
     <!-- Scroll to Top Button -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-        <span class="scroll-to-top-icon">↑↑</span>
+        <svg class="scroll-to-top-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m17 11-5-5-5 5"/>
+            <path d="m17 18-5-5-5 5"/>
+        </svg>
     </button>
     
     <!-- Video Background -->
