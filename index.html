@@ -173,6 +173,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+        
+        .qr-placeholder.hidden {
+            display: none;
         }
         
         .qr-label {
@@ -180,6 +185,72 @@
             color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
             text-align: center;
+        }
+        
+        /* Platform Toggle Switch */
+        .platform-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 120px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .toggle-switch.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 52px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #ef4444;
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(60px);
+        }
+        
+        .toggle-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .toggle-label.active {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        /* Hide badges by default, show based on toggle */
+        .app-badge {
+            transition: opacity 0.3s ease;
+        }
+        
+        .app-badge.hidden {
+            display: none;
         }
         
         /* Video Background Container */
@@ -426,7 +497,7 @@
             position: relative;
             min-height: 120px;
             width: 100%;
-            max-width: 35%;
+            max-width: 70%;
             box-sizing: border-box;
         }
         
@@ -676,7 +747,16 @@
         nav a:not(:last-child)::after {
             content: '•';
             margin-left: 12px;
-            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Copyright Footer */
+        .copyright-footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         
@@ -710,10 +790,13 @@
                 max-width: 100%;
             }
             
+            /* Mobile widths relative to black container with padding (like dropdown tabs) */
             .user-count {
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 95%;
+                max-width: calc(100% - 20px);
+                margin-left: 10px;
+                margin-right: 10px;
             }
             
             .testimonials {
@@ -721,13 +804,17 @@
                 padding-bottom: 24px;
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 100%;
+                max-width: calc(100% - 20px);
+                margin-left: 10px;
+                margin-right: 10px;
             }
             
             .email-signup {
                 padding-left: 10px;
                 padding-right: 10px;
-                max-width: 100%;
+                max-width: calc(100% - 20px);
+                margin-left: 10px;
+                margin-right: 10px;
             }
             
             .email-form {
@@ -736,6 +823,30 @@
             
             .email-submit {
                 width: 100%;
+            }
+            
+            .platform-toggle {
+                gap: 12px;
+                margin: 24px 0;
+            }
+            
+            .toggle-switch {
+                width: 100px;
+                height: 36px;
+            }
+            
+            .toggle-slider {
+                width: 46px;
+                height: 28px;
+                font-size: 0.7rem;
+            }
+            
+            .toggle-switch.active .toggle-slider {
+                transform: translateX(50px);
+            }
+            
+            .toggle-label {
+                font-size: 0.9rem;
             }
             
             .qr-placeholder {
@@ -825,9 +936,22 @@
         
         <!-- Content Container Between Dividers -->
         <div class="content-between-dividers">
-            <!-- QR Code Placeholder (Ember Banner) -->
-            <div class="qr-placeholder">
-                <div class="qr-label">QR Code<br/><small>Coming Soon</small></div>
+            <!-- Platform Toggle Switch -->
+            <div class="platform-toggle">
+                <span class="toggle-label active" id="iosLabel">iOS</span>
+                <div class="toggle-switch active" id="platformToggle">
+                    <div class="toggle-slider">iOS</div>
+                </div>
+                <span class="toggle-label" id="androidLabel">Android</span>
+            </div>
+            
+            <!-- QR Code Placeholders (iOS and Android) -->
+            <div class="qr-placeholder" id="iosQR">
+                <div class="qr-label">iOS QR Code<br/><small>Coming Soon</small></div>
+            </div>
+            
+            <div class="qr-placeholder hidden" id="androidQR">
+                <div class="qr-label">Android QR Code<br/><small>Coming Soon</small></div>
             </div>
             
             <!-- App Store Badges -->
@@ -835,7 +959,7 @@
                 <a href="#" class="app-badge" id="iosBadge" title="Coming soon to App Store" style="height: 60px; min-height: 60px;">
                     <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" style="height: 60px !important; min-height: 60px !important; width: auto !important; display: block;" onerror="this.parentElement.style.display='none';" />
                 </a>
-                <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play" style="height: 60px; min-height: 60px;">
+                <a href="#" class="app-badge hidden" id="androidBadge" title="Coming soon to Google Play" style="height: 60px; min-height: 60px;">
                     <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 60px !important; min-height: 60px !important; width: auto !important; display: block;" onerror="this.parentElement.style.display='none';" />
                 </a>
             </div>
@@ -979,6 +1103,11 @@
                     <path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"></path>
                 </svg>
             </a>
+        </div>
+        
+        <!-- Copyright Footer -->
+        <div class="copyright-footer">
+            © 2025 EMBER VISION VENTURES
         </div>
         
         <!-- Navigation -->
@@ -1191,10 +1320,52 @@
 
 
         // Initialize on page load
+        // Initialize platform toggle switch
+        function initPlatformToggle() {
+            const toggle = document.getElementById('platformToggle');
+            const iosLabel = document.getElementById('iosLabel');
+            const androidLabel = document.getElementById('androidLabel');
+            const iosBadge = document.getElementById('iosBadge');
+            const androidBadge = document.getElementById('androidBadge');
+            const iosQR = document.getElementById('iosQR');
+            const androidQR = document.getElementById('androidQR');
+            
+            let isIOS = true; // Default to iOS
+            
+            function switchPlatform() {
+                isIOS = !isIOS;
+                
+                if (isIOS) {
+                    // Show iOS
+                    toggle.classList.add('active');
+                    toggle.querySelector('.toggle-slider').textContent = 'iOS';
+                    iosLabel.classList.add('active');
+                    androidLabel.classList.remove('active');
+                    iosBadge.classList.remove('hidden');
+                    androidBadge.classList.add('hidden');
+                    iosQR.classList.remove('hidden');
+                    androidQR.classList.add('hidden');
+                } else {
+                    // Show Android
+                    toggle.classList.remove('active');
+                    toggle.querySelector('.toggle-slider').textContent = 'Android';
+                    iosLabel.classList.remove('active');
+                    androidLabel.classList.add('active');
+                    iosBadge.classList.add('hidden');
+                    androidBadge.classList.remove('hidden');
+                    iosQR.classList.add('hidden');
+                    androidQR.classList.remove('hidden');
+                }
+            }
+            
+            toggle.addEventListener('click', switchPlatform);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             fixImagePaths();
             initDropdownTabs();
             initTestimonials();
+            initPlatformToggle();
             fetchUserCount();
         });
     </script>
