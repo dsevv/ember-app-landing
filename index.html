@@ -204,6 +204,8 @@
             height: auto;
             object-fit: cover;
             opacity: 0.25;
+            -webkit-playsinline: true;
+            webkit-playsinline: true;
         }
         
         /* Retro/Vintage Overlay */
@@ -675,8 +677,8 @@
             }
             
             .content-between-dividers {
-                max-width: 98%;
-                width: 98%;
+                max-width: 99%;
+                width: 99%;
             }
             
             .dropdown-tabs {
@@ -749,9 +751,10 @@
 <body>
     <!-- Video Background -->
     <div class="video-background-wrapper">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline webkit-playsinline preload="auto">
             <source src="./Embers vfx(1)-comp.mov" type="video/quicktime">
             <source src="./Embers vfx(1)-comp.mov" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     </div>
     
