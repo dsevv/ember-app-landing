@@ -981,9 +981,68 @@
                 font-size: 1rem;
             }
         }
+        
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-to-top.visible {
+            display: flex;
+        }
+        
+        .scroll-to-top:hover {
+            background: rgba(239, 68, 68, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-to-top:active {
+            transform: translateY(0);
+        }
+        
+        .scroll-to-top-icon {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        @media (max-width: 640px) {
+            .scroll-to-top {
+                width: 44px;
+                height: 44px;
+                top: 16px;
+                right: 16px;
+            }
+            
+            .scroll-to-top-icon {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <span class="scroll-to-top-icon">↑↑</span>
+    </button>
+    
     <!-- Video Background -->
     <div class="video-background-wrapper">
         <video autoplay muted loop playsinline webkit-playsinline preload="auto">
@@ -1442,12 +1501,44 @@
             toggle.addEventListener('click', switchPlatform);
         }
 
+        // Scroll to Top Button
+        function initScrollToTop() {
+            const scrollButton = document.getElementById('scrollToTop');
+            
+            if (!scrollButton) return;
+            
+            // Show/hide button based on scroll position
+            function toggleScrollButton() {
+                if (window.scrollY > 300) {
+                    scrollButton.classList.add('visible');
+                } else {
+                    scrollButton.classList.remove('visible');
+                }
+            }
+            
+            // Scroll to top function
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Add event listeners
+            window.addEventListener('scroll', toggleScrollButton);
+            scrollButton.addEventListener('click', scrollToTop);
+            
+            // Check initial scroll position
+            toggleScrollButton();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             fixImagePaths();
             initDropdownTabs();
             initTestimonials();
             initPlatformToggle();
             fetchUserCount();
+            initScrollToTop();
         });
     </script>
 </body>
