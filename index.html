@@ -985,7 +985,7 @@
         /* Scroll to Top Button */
         .scroll-to-top {
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             width: 48px;
             height: 48px;
@@ -997,13 +997,13 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 9999;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
         .scroll-to-top.visible {
-            display: flex;
+            display: flex !important;
         }
         
         .scroll-to-top:hover {
@@ -1027,7 +1027,7 @@
             .scroll-to-top {
                 width: 44px;
                 height: 44px;
-                top: 16px;
+                bottom: 16px;
                 right: 16px;
             }
             
@@ -1509,7 +1509,7 @@
             
             // Show/hide button based on scroll position
             function toggleScrollButton() {
-                if (window.scrollY > 300) {
+                if (window.scrollY > 200) {
                     scrollButton.classList.add('visible');
                 } else {
                     scrollButton.classList.remove('visible');
