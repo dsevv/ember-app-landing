@@ -45,15 +45,21 @@
             margin: 20px 0;
         }
         .notice-box strong { color: #dc2626; }
-        a { color: #ef4444; text-decoration: none; }
+        a { 
+            color: #ef4444; 
+            text-decoration: none; 
+            word-break: break-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
         a:hover { text-decoration: underline; }
         nav { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; }
     </style>
 </head>
 <body>
     <h1>Terms of Service</h1>
-    <p class="last-updated">Last Updated: November 16, 2025</p>
-    <p class="changes">Changes: added sections on subscriptions/billing, refunds via app stores, push notifications & ads (upcoming), complaints/DMCA; clarified age requirement (18+).</p>
+    <p class="last-updated">Last Updated: November 2025</p>
+    <p class="changes">Changes: added usage counting details (screenshot uploads include text responses, each counts separately); updated email wrapping for better mobile display.</p>
 
     <section>
         <h3>1. Acceptance of Terms</h3>
@@ -130,6 +136,9 @@
             <li>Attempt to overload or abuse the API services</li>
         </ul>
         <p><strong>Usage Limits:</strong> The service enforces daily usage limits to ensure fair access and prevent abuse. These limits may vary by subscription tier and are subject to change.</p>
+        <div class="notice-box">
+            <p><strong>Usage Counting:</strong> Each screenshot upload includes a text response generated directly after the upload, which counts as 1 usage for the screenshot upload and 1 usage for the text response (2 total usages). Each standalone text response counts as 1 usage.</p>
+        </div>
         <div class="notice-box">
             <p><strong>Payment Terms:</strong> Payment terms, subscription details, billing information, and refund policies will be added when payment integration is complete. Current usage limits are for BETA testing purposes and may change when subscriptions become available through the App Store and Google Play Store.</p>
         </div>
