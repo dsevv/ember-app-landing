@@ -146,25 +146,27 @@
         /* Content Container - Between Dividers */
         .content-between-dividers {
             position: relative;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 0;
             padding-top: 40px;
             padding-bottom: 40px;
+            border-radius: 8px;
         }
         
         /* QR Code Placeholder (Ember Banner) */
         .qr-placeholder {
             margin: 40px auto;
+            width: 300px;
+            height: 300px;
             max-width: 300px;
-            width: 100%;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            min-height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -293,7 +295,12 @@
         
         /* Padding above testimonials in dropdown */
         .dropdown-tab-content .testimonials {
-            padding-top: 24px;
+            padding-top: 32px;
+        }
+        
+        /* Additional padding for testimonials carousel */
+        .dropdown-tab-content .testimonials-carousel {
+            margin-top: 16px;
         }
         
         /* Feature Bullet Points */
@@ -668,9 +675,10 @@
             }
             
             .qr-placeholder {
+                width: 250px;
+                height: 250px;
                 max-width: 250px;
                 padding: 24px;
-                min-height: 150px;
             }
             
             .app-badges {
@@ -733,9 +741,23 @@
         
         <!-- Content Container Between Dividers -->
         <div class="content-between-dividers">
-            <!-- Dropdown Tabs -->
+            <!-- QR Code Placeholder (Ember Banner) -->
+            <div class="qr-placeholder">
+                <div class="qr-label">QR Code<br/><small>Coming Soon</small></div>
+            </div>
+            
+            <!-- App Store Badges -->
+            <div class="app-badges">
+                <a href="#" class="app-badge" id="iosBadge" title="Coming soon to App Store">
+                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" onerror="this.parentElement.style.display='none';" />
+                </a>
+                <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" onerror="this.parentElement.style.display='none';" />
+                </a>
+            </div>
+            
+            <!-- Features Dropdown -->
             <div class="dropdown-tabs">
-                <!-- Features Dropdown -->
                 <div class="dropdown-tab" id="featuresTab">
                     <div class="dropdown-tab-header">
                         Features
@@ -752,21 +774,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- QR Code Placeholder (Ember Banner) -->
-            <div class="qr-placeholder">
-                <div class="qr-label">QR Code<br/><small>Coming Soon</small></div>
-            </div>
-            
-            <!-- App Store Badges -->
-            <div class="app-badges">
-                <a href="#" class="app-badge" id="iosBadge" title="Coming soon to App Store">
-                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1609459200" alt="Download on the App Store" onerror="this.parentElement.style.display='none';" />
-                </a>
-                <a href="#" class="app-badge" id="androidBadge" title="Coming soon to Google Play">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" onerror="this.parentElement.style.display='none';" />
-                </a>
             </div>
             
             <!-- User Count -->
@@ -799,8 +806,27 @@
                 <div id="signupMessage" class="email-message"></div>
             </div>
             
-            <!-- Testimonials Dropdown -->
+            <!-- Dropdown Tabs Section -->
             <div class="dropdown-tabs">
+                <!-- Features Tab -->
+                <div class="dropdown-tab" id="featuresTab2">
+                    <div class="dropdown-tab-header">
+                        Features
+                    </div>
+                    <div class="dropdown-tab-content">
+                        <div class="features">
+                            <ul>
+                                <li><span class="emoji">✨</span> <span>AI-powered response generation</span></li>
+                                <li><span class="emoji">🎨</span> <span>9 unique reply styles to match your personality</span></li>
+                                <li><span class="emoji">📅</span> <span>Smart date scheduler and calendar integration</span></li>
+                                <li><span class="emoji">🚫</span> <span>Ad-free experience</span></li>
+                                <li><span class="emoji">⚡</span> <span>Unlimited daily usage with premium tiers</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonials Tab -->
                 <div class="dropdown-tab" id="testimonialsTab">
                     <div class="dropdown-tab-header">
                         Testimonials
@@ -817,6 +843,18 @@
                                     <!-- Testimonials will be inserted here -->
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Tab -->
+                <div class="dropdown-tab" id="faqTab">
+                    <div class="dropdown-tab-header">
+                        FAQ
+                    </div>
+                    <div class="dropdown-tab-content">
+                        <div class="faq-content">
+                            <p style="color: rgba(255, 255, 255, 0.9); padding: 20px 0;">Frequently asked questions will be added here.</p>
                         </div>
                     </div>
                 </div>
