@@ -1528,71 +1528,107 @@
                 return;
             }
             
-            // Force button to be fixed - set inline styles to override everything
-            // Use maximum z-index to ensure it's always on top
-            // Append to body directly to ensure no parent container issues
-            if (scrollButton.parentElement !== document.body) {
+            // Ensure button is directly in body (move if needed)
+            if (scrollButton.parentElement && scrollButton.parentElement !== document.body) {
+                const parent = scrollButton.parentElement;
+                parent.removeChild(scrollButton);
+                document.body.appendChild(scrollButton);
+            } else if (!scrollButton.parentElement) {
                 document.body.appendChild(scrollButton);
             }
             
-            scrollButton.style.cssText = `
-                position: fixed !important;
-                bottom: 40px !important;
-                right: 40px !important;
-                z-index: 2147483647 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                width: 52px !important;
-                height: 52px !important;
-                background: rgba(239, 68, 68, 0.95) !important;
-                border: 2px solid rgba(255, 255, 255, 0.3) !important;
-                border-radius: 50% !important;
-                cursor: pointer !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                will-change: opacity, transform !important;
-                isolation: isolate !important;
-            `;
+            // Force button to be fixed - set ALL styles inline with !important
+            // CRITICAL: position: fixed is what makes it sticky to viewport
+            scrollButton.style.setProperty('position', 'fixed', 'important');
+            scrollButton.style.setProperty('bottom', '40px', 'important');
+            scrollButton.style.setProperty('right', '40px', 'important');
+            scrollButton.style.setProperty('z-index', '2147483647', 'important');
+            scrollButton.style.setProperty('display', 'flex', 'important');
+            scrollButton.style.setProperty('align-items', 'center', 'important');
+            scrollButton.style.setProperty('justify-content', 'center', 'important');
+            scrollButton.style.setProperty('width', '52px', 'important');
+            scrollButton.style.setProperty('height', '52px', 'important');
+            scrollButton.style.setProperty('background', 'rgba(239, 68, 68, 0.95)', 'important');
+            scrollButton.style.setProperty('border', '2px solid rgba(255, 255, 255, 0.3)', 'important');
+            scrollButton.style.setProperty('border-radius', '50%', 'important');
+            scrollButton.style.setProperty('cursor', 'pointer', 'important');
+            scrollButton.style.setProperty('margin', '0', 'important');
+            scrollButton.style.setProperty('padding', '0', 'important');
+            scrollButton.style.setProperty('box-shadow', '0 4px 12px rgba(0, 0, 0, 0.2)', 'important');
+            scrollButton.style.setProperty('top', 'auto', 'important');
+            scrollButton.style.setProperty('left', 'auto', 'important');
+            scrollButton.style.setProperty('transform', 'none', 'important');
+            scrollButton.style.setProperty('opacity', '0', 'important'); // Start hidden
+            scrollButton.style.setProperty('visibility', 'hidden', 'important'); // Start hidden
+            scrollButton.style.setProperty('pointer-events', 'none', 'important');
             
             // Show/hide button based on scroll position
             function toggleScrollButton() {
-                const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+                const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+                
+                // Force position fixed on every scroll check
+                scrollButton.style.setProperty('position', 'fixed', 'important');
+                scrollButton.style.setProperty('bottom', '40px', 'important');
+                scrollButton.style.setProperty('right', '40px', 'important');
+                scrollButton.style.setProperty('z-index', '2147483647', 'important');
+                
+                // Always force position fixed regardless of scroll
+                scrollButton.style.position = 'fixed';
+                scrollButton.style.setProperty('position', 'fixed', 'important');
+                scrollButton.style.bottom = '40px';
+                scrollButton.style.setProperty('bottom', '40px', 'important');
+                scrollButton.style.right = '40px';
+                scrollButton.style.setProperty('right', '40px', 'important');
+                scrollButton.style.zIndex = '2147483647';
+                scrollButton.style.setProperty('z-index', '2147483647', 'important');
+                scrollButton.style.display = 'flex';
+                scrollButton.style.setProperty('display', 'flex', 'important');
                 
                 if (scrollY > 200) {
                     scrollButton.classList.add('visible');
                     scrollButton.style.opacity = '1';
                     scrollButton.style.visibility = 'visible';
                     scrollButton.style.pointerEvents = 'auto';
+                    scrollButton.style.setProperty('opacity', '1', 'important');
+                    scrollButton.style.setProperty('visibility', 'visible', 'important');
+                    scrollButton.style.setProperty('pointer-events', 'auto', 'important');
+                    scrollButton.style.setProperty('display', 'flex', 'important');
                 } else {
                     scrollButton.classList.remove('visible');
                     scrollButton.style.opacity = '0';
                     scrollButton.style.visibility = 'hidden';
                     scrollButton.style.pointerEvents = 'none';
+                    scrollButton.style.setProperty('opacity', '0', 'important');
+                    scrollButton.style.setProperty('visibility', 'hidden', 'important');
+                    scrollButton.style.setProperty('pointer-events', 'none', 'important');
                 }
             }
             
             // Scroll to top function
             function scrollToTop(e) {
-                e.preventDefault();
-                e.stopPropagation();
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
             }
             
-            // Add event listeners
+            // Add event listeners with multiple methods to ensure they work
             window.addEventListener('scroll', toggleScrollButton, { passive: true });
+            window.addEventListener('scroll', toggleScrollButton, false);
+            document.addEventListener('scroll', toggleScrollButton, { passive: true });
             window.addEventListener('resize', toggleScrollButton);
             scrollButton.addEventListener('click', scrollToTop);
             
-            // Check initial scroll position
+            // Check initial scroll position immediately
+            setTimeout(toggleScrollButton, 0);
             toggleScrollButton();
+            
+            // Also check on next frame
+            requestAnimationFrame(toggleScrollButton);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
