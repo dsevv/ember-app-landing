@@ -1119,7 +1119,7 @@
             <!-- User Count -->
             <div class="user-count">
                 <div class="user-count-inner">
-                    Join <span class="number" id="userCount">...</span> users waiting for launch
+                    Join <span class="number" id="userCount">hundreds of</span> users waiting for launch
                 </div>
             </div>
             
@@ -1377,34 +1377,6 @@
             setInterval(showNext, 5000);
         }
 
-        // Fetch user count - SAFE: Only returns count, no personal data exposed
-        async function fetchUserCount() {
-            try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_email_list_count`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-                    }
-                });
-                
-                if (response.ok) {
-                    const count = await response.json();
-                    if (count > 0) {
-                        document.getElementById('userCount').textContent = count.toLocaleString();
-                    } else {
-                        document.getElementById('userCount').textContent = 'hundreds of';
-                    }
-                } else {
-                    document.getElementById('userCount').textContent = 'hundreds of';
-                }
-            } catch (error) {
-                console.error('Error fetching user count:', error);
-                document.getElementById('userCount').textContent = 'hundreds of';
-            }
-        }
-
         // Email signup form handler
         document.getElementById('emailSignupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1443,7 +1415,6 @@
                     messageDiv.textContent = '✅ Thanks! We\'ll notify you when we launch.';
                     messageDiv.className = 'email-message success';
                     emailInput.value = '';
-                    fetchUserCount();
                 } else {
                     throw new Error(result.message || 'Something went wrong');
                 }
@@ -1636,7 +1607,6 @@
             initDropdownTabs();
             initTestimonials();
             initPlatformToggle();
-            fetchUserCount();
             initScrollToTop();
         });
     </script>
