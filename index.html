@@ -983,51 +983,46 @@
             }
         }
         
-        /* Scroll to Top Button - Must be highest z-index */
+        /* Scroll to Top Button - Positioned at bottom right of black container */
         .scroll-to-top {
-            position: fixed !important;
-            bottom: 40px !important;
-            right: 40px !important;
-            width: 52px !important;
-            height: 52px !important;
-            background: rgba(239, 68, 68, 0.95) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 2px solid rgba(255, 255, 255, 0.3) !important;
-            border-radius: 50% !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            cursor: pointer !important;
-            z-index: 2147483647 !important; /* Maximum z-index value */
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin: 0;
+            padding: 0;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            margin: 0 !important;
-            padding: 0 !important;
-            top: auto !important;
-            left: auto !important;
-            transform: none !important;
-        }
-        
-        .scroll-to-top.visible {
-            opacity: 1 !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
-            transform: none !important;
+            z-index: 10;
         }
         
         .scroll-to-top:hover {
             background: rgba(239, 68, 68, 1);
-            transform: translateY(-4px) scale(1.05);
+            transform: translateY(-2px) scale(1.05);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             border-color: rgba(255, 255, 255, 0.5);
         }
         
         .scroll-to-top:active {
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(0) scale(1.02);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
         
         .scroll-to-top-icon {
@@ -1053,14 +1048,6 @@
     </style>
 </head>
 <body>
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-        <svg class="scroll-to-top-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m17 11-5-5-5 5"/>
-            <path d="m17 18-5-5-5 5"/>
-        </svg>
-    </button>
-    
     <!-- Video Background -->
     <div class="video-background-wrapper">
         <video autoplay muted loop playsinline webkit-playsinline preload="auto">
@@ -1223,6 +1210,14 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Scroll to Top Button (bottom right of black container) -->
+            <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+                <svg class="scroll-to-top-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m17 11-5-5-5 5"/>
+                    <path d="m17 18-5-5-5 5"/>
+                </svg>
+            </button>
         </div>
         
         <!-- Social Media Links -->
@@ -1298,7 +1293,8 @@
             { text: "I feel like this app is really needed in todays dating landscape where everyone is now meeting through dating apps", author: "Ava" },
             { text: "Life saver when I draw a blank, insightfully learning from the AI has improved my flirting skills in a creative way.", author: "Chris" },
             { text: "This is definitely making my dating life more efficient, hopefully to not too much of a crutch, haha.", author: "T. Reyes" },
-            { text: "This app originally helped me meet the absolute love of my life and current spouse Tyler! Who knew AI would be this useful?!", author: "Nina" }
+            { text: "This app originally helped me meet the absolute love of my life and current spouse Tyler! Who knew AI would be this useful?!", author: "Nina" },
+            { text: "Great app! Helps me craft better messages.", author: "Rohan" }
         ];
 
         // Initialize dropdown tabs
@@ -1350,7 +1346,7 @@
             function showNext() {
                 currentIndex++;
                 
-                // If we've reached the end of the original set, reset to start instantly
+                // If we've reached the end of the original set, reset to start
                 if (currentIndex >= totalTestimonials) {
                     // Disable transition for instant reset
                     track.style.transition = 'none';
@@ -1360,10 +1356,10 @@
                     // Force reflow to ensure the reset happens
                     void track.offsetHeight;
                     
-                    // Re-enable transition and move to next slide
+                    // Re-enable transition - show index 0 (Sarah) first, don't skip it
                     requestAnimationFrame(() => {
                         track.style.transition = 'transform 0.6s ease-in-out';
-                        currentIndex = 1;
+                        // Keep currentIndex at 0 to show Sarah, next iteration will move to 1
                         track.style.transform = `translateX(-${currentIndex * 100}%)`;
                     });
                 } else {
@@ -1499,79 +1495,20 @@
                 return;
             }
             
-            // Ensure button is directly in body (move if needed)
-            if (scrollButton.parentElement && scrollButton.parentElement !== document.body) {
-                const parent = scrollButton.parentElement;
-                parent.removeChild(scrollButton);
-                document.body.appendChild(scrollButton);
-            } else if (!scrollButton.parentElement) {
-                document.body.appendChild(scrollButton);
-            }
-            
-            // Force button to be fixed - set ALL styles inline with !important
-            // CRITICAL: position: fixed is what makes it sticky to viewport
-            scrollButton.style.setProperty('position', 'fixed', 'important');
-            scrollButton.style.setProperty('bottom', '40px', 'important');
-            scrollButton.style.setProperty('right', '40px', 'important');
-            scrollButton.style.setProperty('z-index', '2147483647', 'important');
-            scrollButton.style.setProperty('display', 'flex', 'important');
-            scrollButton.style.setProperty('align-items', 'center', 'important');
-            scrollButton.style.setProperty('justify-content', 'center', 'important');
-            scrollButton.style.setProperty('width', '52px', 'important');
-            scrollButton.style.setProperty('height', '52px', 'important');
-            scrollButton.style.setProperty('background', 'rgba(239, 68, 68, 0.95)', 'important');
-            scrollButton.style.setProperty('border', '2px solid rgba(255, 255, 255, 0.3)', 'important');
-            scrollButton.style.setProperty('border-radius', '50%', 'important');
-            scrollButton.style.setProperty('cursor', 'pointer', 'important');
-            scrollButton.style.setProperty('margin', '0', 'important');
-            scrollButton.style.setProperty('padding', '0', 'important');
-            scrollButton.style.setProperty('box-shadow', '0 4px 12px rgba(0, 0, 0, 0.2)', 'important');
-            scrollButton.style.setProperty('top', 'auto', 'important');
-            scrollButton.style.setProperty('left', 'auto', 'important');
-            scrollButton.style.setProperty('transform', 'none', 'important');
-            scrollButton.style.setProperty('opacity', '0', 'important'); // Start hidden
-            scrollButton.style.setProperty('visibility', 'hidden', 'important'); // Start hidden
-            scrollButton.style.setProperty('pointer-events', 'none', 'important');
-            
             // Show/hide button based on scroll position
             function toggleScrollButton() {
                 const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-                
-                // Force position fixed on every scroll check
-                scrollButton.style.setProperty('position', 'fixed', 'important');
-                scrollButton.style.setProperty('bottom', '40px', 'important');
-                scrollButton.style.setProperty('right', '40px', 'important');
-                scrollButton.style.setProperty('z-index', '2147483647', 'important');
-                
-                // Always force position fixed regardless of scroll
-                scrollButton.style.position = 'fixed';
-                scrollButton.style.setProperty('position', 'fixed', 'important');
-                scrollButton.style.bottom = '40px';
-                scrollButton.style.setProperty('bottom', '40px', 'important');
-                scrollButton.style.right = '40px';
-                scrollButton.style.setProperty('right', '40px', 'important');
-                scrollButton.style.zIndex = '2147483647';
-                scrollButton.style.setProperty('z-index', '2147483647', 'important');
-                scrollButton.style.display = 'flex';
-                scrollButton.style.setProperty('display', 'flex', 'important');
                 
                 if (scrollY > 200) {
                     scrollButton.classList.add('visible');
                     scrollButton.style.opacity = '1';
                     scrollButton.style.visibility = 'visible';
                     scrollButton.style.pointerEvents = 'auto';
-                    scrollButton.style.setProperty('opacity', '1', 'important');
-                    scrollButton.style.setProperty('visibility', 'visible', 'important');
-                    scrollButton.style.setProperty('pointer-events', 'auto', 'important');
-                    scrollButton.style.setProperty('display', 'flex', 'important');
                 } else {
                     scrollButton.classList.remove('visible');
                     scrollButton.style.opacity = '0';
                     scrollButton.style.visibility = 'hidden';
                     scrollButton.style.pointerEvents = 'none';
-                    scrollButton.style.setProperty('opacity', '0', 'important');
-                    scrollButton.style.setProperty('visibility', 'hidden', 'important');
-                    scrollButton.style.setProperty('pointer-events', 'none', 'important');
                 }
             }
             
@@ -1587,28 +1524,34 @@
                 });
             }
             
-            // Add event listeners with multiple methods to ensure they work
+            // Add event listeners
             window.addEventListener('scroll', toggleScrollButton, { passive: true });
-            window.addEventListener('scroll', toggleScrollButton, false);
-            document.addEventListener('scroll', toggleScrollButton, { passive: true });
             window.addEventListener('resize', toggleScrollButton);
             scrollButton.addEventListener('click', scrollToTop);
             
-            // Check initial scroll position immediately
-            setTimeout(toggleScrollButton, 0);
+            // Check initial scroll position
             toggleScrollButton();
-            
-            // Also check on next frame
-            requestAnimationFrame(toggleScrollButton);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔵 DOMContentLoaded fired');
             fixImagePaths();
             initDropdownTabs();
             initTestimonials();
             initPlatformToggle();
             initScrollToTop();
+            console.log('✅ All initialization complete');
         });
+        
+        // Also try immediate execution in case DOMContentLoaded already fired
+        if (document.readyState === 'loading') {
+            console.log('🔵 Document still loading, waiting for DOMContentLoaded');
+        } else {
+            console.log('🔵 Document already loaded, running initScrollToTop immediately');
+            setTimeout(() => {
+                initScrollToTop();
+            }, 100);
+        }
     </script>
 </body>
 </html>
