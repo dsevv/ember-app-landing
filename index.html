@@ -154,7 +154,7 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 0;
             padding-top: 40px;
-            padding-bottom: 40px;
+            padding-bottom: 100px;
             border-radius: 8px;
             box-sizing: border-box;
         }
@@ -980,7 +980,7 @@
         /* Scroll to Top Button - Positioned at bottom right of black container */
         .scroll-to-top {
             position: absolute;
-            bottom: 40px;
+            bottom: 20px;
             right: 20px;
             width: 48px;
             height: 48px;
@@ -1030,8 +1030,8 @@
             .scroll-to-top {
                 width: 48px;
                 height: 48px;
-                bottom: 120px;
-                right: 15px;
+                bottom: 30px;
+                right: 30px;
             }
             
             .scroll-to-top-icon {
@@ -1284,7 +1284,7 @@
             { text: "Never Miss a date again.", author: "J. R." },
             { text: "I feel like this app is really needed in todays dating landscape where everyone is now meeting through dating apps", author: "Ava" },
             { text: "Life saver when I draw a blank, insightfully learning from the AI has improved my flirting skills in a creative way.", author: "Chris" },
-            { text: "This is definitely making my dating life more efficient, hopefully to not too much of a crutch, haha.", author: "T. Reyes" },
+            { text: "This is definitely making my dating life more efficient, hopefully it wont be a crutch, haha.", author: "T. Reyes" },
             { text: "This app originally helped me meet the absolute love of my life and current spouse Tyler! Who knew AI would be this useful?!", author: "Nina" },
             { text: "Great app! Helps me craft better messages.", author: "Rohan" }
         ];
@@ -1321,44 +1321,50 @@
                 track.appendChild(div);
             });
             
-            // Clone testimonials for seamless looping
-            testimonials.forEach((testimonial, index) => {
-                const div = document.createElement('div');
-                div.className = 'testimonial';
-                div.innerHTML = `
-                    <p class="testimonial-text">${testimonial.text}</p>
-                    <div class="testimonial-author">— ${testimonial.author}</div>
-                `;
-                track.appendChild(div);
-            });
+            // Clone first testimonial at the end for seamless looping
+            const firstTestimonial = testimonials[0];
+            const cloneDiv = document.createElement('div');
+            cloneDiv.className = 'testimonial';
+            cloneDiv.innerHTML = `
+                <p class="testimonial-text">${firstTestimonial.text}</p>
+                <div class="testimonial-author">— ${firstTestimonial.author}</div>
+            `;
+            track.appendChild(cloneDiv);
             
             let currentIndex = 0;
             const totalTestimonials = testimonials.length;
+            let isTransitioning = false;
             
             function showNext() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                
                 currentIndex++;
                 
-                // If we've reached the end of the original set, reset to start
-                if (currentIndex >= totalTestimonials) {
-                    // Disable transition for instant reset
-                    track.style.transition = 'none';
-                    currentIndex = 0;
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                    
-                    // Force reflow to ensure the reset happens
-                    void track.offsetHeight;
-                    
-                    // Re-enable transition - show index 0 (Sarah) first, don't skip it
-                    requestAnimationFrame(() => {
-                        track.style.transition = 'transform 0.6s ease-in-out';
-                        // Keep currentIndex at 0 to show Sarah, next iteration will move to 1
+                // Smoothly transition to the cloned first item (which appears after all originals)
+                track.style.transition = 'transform 0.6s ease-in-out';
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // After transition completes, instantly reset to the real first item
+                setTimeout(() => {
+                    if (currentIndex >= totalTestimonials) {
+                        // Disable transition for instant reset
+                        track.style.transition = 'none';
+                        currentIndex = 0;
                         track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                    });
-                } else {
-                    // Normal transition
-                    track.style.transition = 'transform 0.6s ease-in-out';
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                }
+                        
+                        // Force reflow
+                        void track.offsetHeight;
+                        
+                        // Re-enable transition for next iteration
+                        setTimeout(() => {
+                            isTransitioning = false;
+                            track.style.transition = 'transform 0.6s ease-in-out';
+                        }, 50);
+                    } else {
+                        isTransitioning = false;
+                    }
+                }, 600); // Wait for transition to complete (600ms)
             }
             
             // Auto-scroll every 5 seconds
