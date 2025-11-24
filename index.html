@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ember - AI Dating Assistant</title>
     <link rel="canonical" href="https://emberaidating.app/">
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JK6P188RT9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Get UTM parameters from URL
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        
+        // Capture UTM parameters and store in sessionStorage for tracking
+        const utmParams = {
+            source: getUrlParameter('utm_source') || 'direct',
+            medium: getUrlParameter('utm_medium') || 'none',
+            campaign: getUrlParameter('utm_campaign') || 'none',
+            content: getUrlParameter('utm_content') || 'none',
+            term: getUrlParameter('utm_term') || 'none'
+        };
+        
+        // Store UTM parameters in sessionStorage for later use
+        sessionStorage.setItem('utm_source', utmParams.source);
+        sessionStorage.setItem('utm_medium', utmParams.medium);
+        sessionStorage.setItem('utm_campaign', utmParams.campaign);
+        sessionStorage.setItem('utm_content', utmParams.content);
+        sessionStorage.setItem('utm_term', utmParams.term);
+        
+        // Initialize GA4 with UTM parameters
+        gtag('config', 'G-JK6P188RT9', {
+            'page_path': window.location.pathname + window.location.search,
+            'custom_map': {
+                'dimension1': 'utm_source',
+                'dimension2': 'utm_medium',
+                'dimension3': 'utm_campaign',
+                'dimension4': 'utm_content',
+                'dimension5': 'utm_term'
+            },
+            'utm_source': utmParams.source,
+            'utm_medium': utmParams.medium,
+            'utm_campaign': utmParams.campaign,
+            'utm_content': utmParams.content,
+            'utm_term': utmParams.term
+        });
+        
+        // Track page view with UTM parameters
+        gtag('event', 'page_view', {
+            'page_title': document.title,
+            'page_location': window.location.href,
+            'utm_source': utmParams.source,
+            'utm_medium': utmParams.medium,
+            'utm_campaign': utmParams.campaign,
+            'utm_content': utmParams.content,
+            'utm_term': utmParams.term
+        });
+    </script>
+    
     <script>
         // Set base path - only for GitHub Pages, not custom domain
         (function() {
@@ -1371,6 +1430,23 @@
             setInterval(showNext, 5000);
         }
 
+        // Helper function to get UTM parameters from sessionStorage or URL
+        function getUtmParams() {
+            return {
+                source: sessionStorage.getItem('utm_source') || getUrlParameter('utm_source') || 'direct',
+                medium: sessionStorage.getItem('utm_medium') || getUrlParameter('utm_medium') || 'none',
+                campaign: sessionStorage.getItem('utm_campaign') || getUrlParameter('utm_campaign') || 'none',
+                content: sessionStorage.getItem('utm_content') || getUrlParameter('utm_content') || 'none',
+                term: sessionStorage.getItem('utm_term') || getUrlParameter('utm_term') || 'none'
+            };
+        }
+        
+        // Helper function to get URL parameter
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
         // Email signup form handler
         document.getElementById('emailSignupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1383,11 +1459,23 @@
             if (!email || !email.includes('@')) {
                 messageDiv.textContent = 'Please enter a valid email address.';
                 messageDiv.className = 'email-message error';
+                
+                // Track validation error
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'email_signup_error', {
+                        'event_category': 'form',
+                        'event_label': 'validation_error',
+                        'value': 0
+                    });
+                }
                 return;
             }
             
             submitButton.disabled = true;
             submitButton.textContent = 'Subscribing...';
+            
+            // Get UTM parameters for tracking
+            const utmParams = getUtmParams();
             
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/subscribe_to_email_list`, {
@@ -1409,6 +1497,32 @@
                     messageDiv.textContent = '✅ Thanks! We\'ll notify you when we launch.';
                     messageDiv.className = 'email-message success';
                     emailInput.value = '';
+                    
+                    // Track successful email signup conversion
+                    // Use window.gtag to ensure it's available
+                    if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'email_signup', {
+                            'event_category': 'conversion',
+                            'event_label': 'landing_page',
+                            'value': 1,
+                            'currency': 'USD',
+                            // Include UTM parameters for attribution
+                            'utm_source': utmParams.source,
+                            'utm_medium': utmParams.medium,
+                            'utm_campaign': utmParams.campaign,
+                            'utm_content': utmParams.content,
+                            'utm_term': utmParams.term
+                        });
+                        
+                        console.log('✅ Email signup event tracked:', {
+                            event: 'email_signup',
+                            utm_source: utmParams.source,
+                            utm_medium: utmParams.medium,
+                            utm_campaign: utmParams.campaign
+                        });
+                    } else {
+                        console.warn('⚠️ gtag not available, event not tracked');
+                    }
                 } else {
                     throw new Error(result.message || 'Something went wrong');
                 }
@@ -1416,6 +1530,16 @@
                 console.error('Signup error:', error);
                 messageDiv.textContent = '❌ Something went wrong. Please try again.';
                 messageDiv.className = 'email-message error';
+                
+                // Track signup error
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'email_signup_error', {
+                        'event_category': 'form',
+                        'event_label': 'api_error',
+                        'value': 0,
+                        'error_message': error.message || 'unknown_error'
+                    });
+                }
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = 'Notify Me';
@@ -1531,6 +1655,118 @@
             toggleScrollButton();
         }
 
+        // Track App Store badge clicks
+        function initAppStoreTracking() {
+            const iosBadge = document.getElementById('iosBadge');
+            const androidBadge = document.getElementById('androidBadge');
+            const utmParams = getUtmParams();
+            
+            if (iosBadge) {
+                iosBadge.addEventListener('click', function() {
+                    if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'app_store_click', {
+                            'event_category': 'download',
+                            'event_label': 'ios',
+                            'value': 1,
+                            'utm_source': utmParams.source,
+                            'utm_medium': utmParams.medium,
+                            'utm_campaign': utmParams.campaign,
+                            'utm_content': utmParams.content,
+                            'utm_term': utmParams.term
+                        });
+                    }
+                });
+            }
+            
+            if (androidBadge) {
+                androidBadge.addEventListener('click', function() {
+                    if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'app_store_click', {
+                            'event_category': 'download',
+                            'event_label': 'android',
+                            'value': 1,
+                            'utm_source': utmParams.source,
+                            'utm_medium': utmParams.medium,
+                            'utm_campaign': utmParams.campaign,
+                            'utm_content': utmParams.content,
+                            'utm_term': utmParams.term
+                        });
+                    }
+                });
+            }
+        }
+        
+        // Track social media link clicks
+        function initSocialMediaTracking() {
+            const socialLinks = document.querySelectorAll('.social-link');
+            const utmParams = getUtmParams();
+            
+            socialLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const platform = this.getAttribute('aria-label') || 'unknown';
+                    if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'social_click', {
+                            'event_category': 'social',
+                            'event_label': platform,
+                            'value': 1,
+                            'utm_source': utmParams.source,
+                            'utm_medium': utmParams.medium,
+                            'utm_campaign': utmParams.campaign
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Track scroll depth (engagement metric)
+        function initScrollTracking() {
+            let maxScroll = 0;
+            const scrollThresholds = [25, 50, 75, 90];
+            const trackedThresholds = new Set();
+            
+            window.addEventListener('scroll', function() {
+                const scrollPercent = Math.round(
+                    (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100
+                );
+                
+                if (scrollPercent > maxScroll) {
+                    maxScroll = scrollPercent;
+                    
+                    scrollThresholds.forEach(threshold => {
+                        if (scrollPercent >= threshold && !trackedThresholds.has(threshold)) {
+                            trackedThresholds.add(threshold);
+                            
+                            if (typeof window.gtag === 'function') {
+                                window.gtag('event', 'scroll', {
+                                    'event_category': 'engagement',
+                                    'event_label': threshold + '%',
+                                    'value': threshold
+                                });
+                            }
+                        }
+                    });
+                }
+            }, { passive: true });
+        }
+        
+        // Track time on page (engagement metric)
+        function initTimeOnPageTracking() {
+            const startTime = Date.now();
+            
+            // Track time on page when user leaves
+            window.addEventListener('beforeunload', function() {
+                const timeOnPage = Math.round((Date.now() - startTime) / 1000); // seconds
+                
+                if (typeof window.gtag === 'function' && timeOnPage > 0) {
+                    window.gtag('event', 'time_on_page', {
+                        'event_category': 'engagement',
+                        'value': timeOnPage,
+                        'non_interaction': true
+                    });
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             console.log('🔵 DOMContentLoaded fired');
             fixImagePaths();
@@ -1538,6 +1774,10 @@
             initTestimonials();
             initPlatformToggle();
             initScrollToTop();
+            initAppStoreTracking();
+            initSocialMediaTracking();
+            initScrollTracking();
+            initTimeOnPageTracking();
             console.log('✅ All initialization complete');
         });
         
