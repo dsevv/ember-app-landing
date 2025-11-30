@@ -77,8 +77,8 @@
 </head>
 <body>
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last Updated: November 2025</p>
-    <p class="changes">Changes: added Google Analytics disclosure in Third-Party Services section; updated Analytics and Advertising section to reflect current Google Analytics implementation; clarified data collection practices.</p>
+    <p class="last-updated">Last Updated: November 29, 2025</p>
+    <p class="changes">Changes: added push notifications disclosure; updated data collection to include push notification tokens; added Firebase Cloud Messaging and Apple Push Notification Service to third-party services; updated notification controls and user rights.</p>
 
     <section>
         <h3>1. Introduction</h3>
@@ -101,6 +101,8 @@
             <li>App usage data and preferences</li>
             <li>Device information and identifiers</li>
             <li>Usage statistics (screenshots analyzed, responses generated)</li>
+            <li>Push notification tokens (device-specific identifiers used to deliver notifications to your device)</li>
+            <li>Calendar event data (dates, times, names) for scheduling reminder notifications</li>
         </ul>
     </section>
 
@@ -109,6 +111,8 @@
         <p>We use your information to:</p>
         <ul>
             <li>Provide AI-powered conversation suggestions</li>
+            <li>Send push notifications for date reminders, subscription updates, usage warnings, and app review requests</li>
+            <li>Schedule and deliver timely notifications based on your calendar events and subscription status</li>
             <li>Improve our service and user experience</li>
             <li>Analyze app performance and usage patterns</li>
             <li>Maintain and secure our platform</li>
@@ -158,7 +162,9 @@
         <p>We use third-party services for app functionality:</p>
         <ul>
             <li><strong>OpenAI:</strong> For AI-powered conversation analysis and response generation. Your conversation data is sent to OpenAI for processing but is not stored by OpenAI beyond the processing period.</li>
-            <li><strong>Supabase:</strong> For backend API services and usage tracking. Data is processed according to Supabase's privacy policy.</li>
+            <li><strong>Supabase:</strong> For backend API services, usage tracking, and notification scheduling. Data is processed according to Supabase's privacy policy.</li>
+            <li><strong>Firebase Cloud Messaging (FCM):</strong> For delivering push notifications to Android devices. Firebase processes push notification tokens and device identifiers to deliver notifications. Data is processed according to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>. You can disable push notifications in your device settings.</li>
+            <li><strong>Apple Push Notification Service (APNs):</strong> For delivering push notifications to iOS devices. Apple processes push notification tokens and device identifiers to deliver notifications. Data is processed according to <a href="https://www.apple.com/privacy/" target="_blank" rel="noopener noreferrer">Apple's Privacy Policy</a>. You can disable push notifications in your device settings.</li>
             <li><strong>Google Analytics:</strong> For website and app analytics to understand how users interact with our service. Google Analytics collects anonymized data such as page views, user interactions, and traffic sources. This helps us improve our service and understand user behavior. Google Analytics may use cookies and similar technologies. You can opt-out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a> or by adjusting your browser settings. Data collected by Google Analytics is subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</li>
         </ul>
         <p>These services have their own privacy policies governing the use of your information. We encourage you to review their policies.</p>
@@ -176,7 +182,14 @@
         <h3>8. Analytics and Advertising</h3>
         <p><strong>Analytics:</strong> We use Google Analytics to track website and app usage, including page views, user interactions, and traffic sources. This data is anonymized and helps us improve our service. See Section 6 for more details about Google Analytics.</p>
         <p><strong>Advertising:</strong> We may introduce in‑app advertising (e.g., AdMob) in the future. If enabled, we will update this Privacy Policy to describe what data is used for ads personalization/measurement and provide controls for your preferences.</p>
-        <p><strong>Push Notifications:</strong> We may introduce push notifications in the future. If enabled, we will update this Privacy Policy to describe what data is used for notifications and provide controls for your preferences.</p>
+        <p><strong>Push Notifications:</strong> We send push notifications to keep you informed about important events and updates. Notifications include:</p>
+        <ul>
+            <li><strong>Date Reminders:</strong> Notifications 24 hours and 3 hours before scheduled dates</li>
+            <li><strong>Subscription Updates:</strong> Trial ending reminders, subscription expiration warnings, and renewal notices</li>
+            <li><strong>Usage Warnings:</strong> Alerts when you reach 80% of your usage limits</li>
+            <li><strong>App Review Requests:</strong> Prompts to leave app store reviews (sent 1 day after signup)</li>
+        </ul>
+        <p>To send notifications, we collect and store a push notification token (a device-specific identifier) associated with your account. This token is required to deliver notifications to your device. You can disable push notifications at any time through your device settings. When you disable notifications, we will stop sending them, but your token may remain stored until you delete your account.</p>
     </section>
 
     <section>
@@ -186,6 +199,7 @@
             <li>Access your personal data</li>
             <li>Delete individual chats and conversations directly in the app (chats are automatically deleted after the 15th item in the grid list, or you can delete them manually at any time)</li>
             <li>Delete scheduled calendar dates (dates are automatically deleted 1 day after the current date, or you can delete them manually at any time)</li>
+            <li>Enable or disable push notifications through your device settings</li>
             <li>Request deletion of all your data</li>
             <li>Opt-out of data collection where applicable (including Google Analytics via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>)</li>
             <li>Update your information at any time</li>
