@@ -77,8 +77,8 @@
 </head>
 <body>
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last Updated: November 29, 2025</p>
-    <p class="changes">Changes: added push notifications disclosure; updated data collection to include push notification tokens; added Firebase Cloud Messaging and Apple Push Notification Service to third-party services; updated notification controls and user rights.</p>
+    <p class="last-updated">Last Updated: January 15, 2025</p>
+    <p class="changes">Changes: expanded data collection section with detailed categories; added 1-year inactive account deletion policy; updated data retention and management sections.</p>
 
     <section>
         <h3>1. Introduction</h3>
@@ -94,15 +94,44 @@
 
     <section>
         <h3>2. Information We Collect</h3>
-        <p>We may collect the following types of information:</p>
+        <p>We collect the following types of information to provide and improve our service:</p>
+        
+        <p><strong>Account Information:</strong></p>
         <ul>
-            <li>Screenshots you upload for conversation analysis</li>
-            <li>Text conversations you manually input</li>
-            <li>App usage data and preferences</li>
-            <li>Device information and identifiers</li>
-            <li>Usage statistics (screenshots analyzed, responses generated)</li>
-            <li>Push notification tokens (device-specific identifiers used to deliver notifications to your device)</li>
-            <li>Calendar event data (dates, times, names) for scheduling reminder notifications</li>
+            <li><strong>Email address:</strong> Collected during account creation and authentication (Apple Sign In, Google Sign In, or email/password)</li>
+            <li><strong>User ID:</strong> Unique identifier associated with your account</li>
+        </ul>
+
+        <p><strong>User Content:</strong></p>
+        <ul>
+            <li><strong>Screenshots:</strong> Images you upload for conversation analysis</li>
+            <li><strong>Text conversations:</strong> Conversation text you manually input for AI response generation</li>
+            <li><strong>Calendar events:</strong> Dates, times, locations, names, and notes you add for scheduling reminders</li>
+            <li><strong>Chat history:</strong> Saved conversations, generated responses, and selected responses</li>
+        </ul>
+
+        <p><strong>Usage and Analytics Data:</strong></p>
+        <ul>
+            <li><strong>Usage statistics:</strong> Number of screenshots analyzed and text responses generated per day</li>
+            <li><strong>App activity:</strong> Feature usage, interaction patterns, and app performance data</li>
+            <li><strong>Last activity timestamp:</strong> Tracks when you last used the app (for account management)</li>
+        </ul>
+
+        <p><strong>Device and Technical Information:</strong></p>
+        <ul>
+            <li><strong>Device identifiers:</strong> Device-specific information for app functionality</li>
+            <li><strong>Push notification tokens:</strong> Device-specific identifiers required to deliver push notifications to your device</li>
+            <li><strong>IP address:</strong> Collected for security, rate limiting, and abuse prevention</li>
+        </ul>
+
+        <p><strong>Subscription and Payment Information:</strong></p>
+        <ul>
+            <li><strong>Subscription tier:</strong> Your current subscription level (free, premium, or diamond)</li>
+            <li><strong>Payment provider:</strong> Apple App Store or Google Play Store</li>
+            <li><strong>Payment transaction IDs:</strong> External payment identifiers from app stores</li>
+            <li><strong>Subscription status:</strong> Active, cancelled, expired, or trial status</li>
+            <li><strong>Billing cycle:</strong> Subscription period (weekly, monthly, etc.)</li>
+            <li><strong>Subscription expiration dates:</strong> When your subscription expires or renews</li>
         </ul>
     </section>
 
@@ -134,7 +163,14 @@
 
     <section>
         <h3>4.1 Data Retention</h3>
-        <p>We retain only the minimum data necessary to provide the service. Most content you provide (e.g., screenshots, text inputs) is processed on-device or transiently and is not stored on our servers beyond what is required for usage tracking and core functionality. Aggregated, anonymized usage metrics may be retained to improve product quality and reliability.</p>
+        <p>We retain only the minimum data necessary to provide the service. Your data is stored securely in our database and is retained as follows:</p>
+        <ul>
+            <li><strong>Active Users:</strong> All data is retained while your account is active and you are using the service.</li>
+            <li><strong>Inactive Users:</strong> Accounts that have been inactive for 1 year (365 days) with no active subscription will be automatically deleted. This includes all associated data (profile, chats, usage statistics, calendar events, and subscriptions).</li>
+            <li><strong>Active Subscribers:</strong> Users with active subscriptions are protected from automatic deletion, even if inactive for extended periods, to ensure paying customers retain access to their data.</li>
+            <li><strong>Aggregated Data:</strong> Aggregated, anonymized usage metrics may be retained to improve product quality and reliability.</li>
+        </ul>
+        <p><strong>Inactivity Definition:</strong> An account is considered inactive if there has been no login or API activity for 365 consecutive days. Activity is tracked through login events and API usage.</p>
     </section>
 
     <section>
@@ -145,9 +181,10 @@
             <li><strong>Chats - Manual Deletion:</strong> You can delete individual chats and conversations manually at any time directly from the app.</li>
             <li><strong>Calendar Dates - Automatic Deletion:</strong> Scheduled dates are automatically deleted 1 day after the current date (meaning after the date has passed).</li>
             <li><strong>Calendar Dates - Manual Deletion:</strong> You can delete scheduled dates manually at any time from the Calendar page.</li>
-            <li><strong>Account Deletion:</strong> You can request deletion of all your data by contacting us or visiting the Account Settings page.</li>
+            <li><strong>Account Deletion:</strong> You can request immediate deletion of all your data by contacting us or visiting the Account Settings page. Account deletion is permanent and cannot be undone.</li>
+            <li><strong>Automatic Account Deletion:</strong> Inactive accounts (no activity for 1 year) with no active subscription will be automatically deleted monthly. You will receive no notification before automatic deletion. To prevent deletion, simply log in or use the app at least once per year.</li>
         </ul>
-        <p>When you delete chats or conversations, associated screenshots and data are permanently removed from your device. Data stored with third-party services (such as OpenAI) may be retained according to their own data retention policies.</p>
+        <p>When you delete chats or conversations, associated screenshots and data are permanently removed. When your account is deleted (manually or automatically), all associated data including profile, chats, usage statistics, calendar events, and subscription records are permanently deleted. Data stored with third-party services (such as OpenAI) may be retained according to their own data retention policies.</p>
     </section>
 
     <section>
