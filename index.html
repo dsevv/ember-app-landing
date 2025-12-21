@@ -318,8 +318,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
             overflow: hidden;
+        }
+        
+        /* New iOS App Video (below embers) */
+        .app-video-wrapper {
+            z-index: -2;
+        }
+        
+        /* Embers Video (on top) */
+        .embers-video-wrapper {
+            z-index: -1;
         }
         
         .video-background-wrapper video {
@@ -332,9 +341,18 @@
             width: auto;
             height: auto;
             object-fit: cover;
-            opacity: 0.25;
             -webkit-playsinline: true;
             webkit-playsinline: true;
+        }
+        
+        /* Embers video opacity */
+        .embers-video-wrapper video {
+            opacity: 0.25;
+        }
+        
+        /* New app video opacity - adjust as needed */
+        .app-video-wrapper video {
+            opacity: 0.6;
         }
         
         /* Retro/Vintage Overlay */
@@ -1101,8 +1119,17 @@
     </style>
 </head>
 <body>
-    <!-- Video Background -->
-    <div class="video-background-wrapper">
+    <!-- New iOS App Video Background (below embers) -->
+    <div class="video-background-wrapper app-video-wrapper">
+        <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+            <source src="./Ember AI Dating Assistant (New iOS App).MP4" type="video/mp4">
+            <source src="./Ember AI Dating Assistant (New iOS App).MP4" type="video/quicktime">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <!-- Video Background (Embers - on top) -->
+    <div class="video-background-wrapper embers-video-wrapper">
         <video autoplay muted loop playsinline webkit-playsinline preload="auto">
             <source src="./Embers vfx(1)-comp.mov" type="video/quicktime">
             <source src="./Embers vfx(1)-comp.mov" type="video/mp4">
