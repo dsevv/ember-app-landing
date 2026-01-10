@@ -1211,8 +1211,8 @@
                     <div class="dropdown-tab-content">
                         <div class="faq-content">
                             <div class="faq-item" style="margin-top: 24px;">
-                                <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">When will Ember be available?</h3>
-                                <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 20px; line-height: 1.6;">We're currently in development and plan to launch soon! Sign up with your email to be notified as soon as we're available on iOS and Android.</p>
+                                <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">Is Ember available now?</h3>
+                                <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 20px; line-height: 1.6;">Yes! Ember is now available on both iOS and Android. Download it from the App Store or Google Play Store using the links above.</p>
                             </div>
                             <div class="faq-item">
                                 <h3 style="color: #ffffff; margin-bottom: 8px; font-size: 1.1rem;">What makes Ember different from other apps?</h3>
@@ -1245,8 +1245,8 @@
             
             <!-- Email Signup Form -->
             <div class="email-signup">
-                <h2>Get Notified When We Launch</h2>
-                <p>Be the first to know when Ember is available on iOS and Android.</p>
+                <h2>Stay Updated</h2>
+                <p>Get the latest updates, new features, and dating tips delivered to your inbox.</p>
                 
                 <form id="emailSignupForm" class="email-form">
                     <input 
@@ -1261,7 +1261,7 @@
                         id="emailSubmit"
                         class="email-submit"
                     >
-                        Notify Me
+                        Subscribe
                     </button>
                 </form>
                 
@@ -1271,7 +1271,7 @@
             <!-- User Count -->
             <div class="user-count">
                 <div class="user-count-inner">
-                    Join <span class="number" id="userCount">hundreds of</span> users waiting for launch
+                    Join <span class="number" id="userCount">thousands of</span> users already using Ember
                 </div>
             </div>
             
@@ -1507,7 +1507,7 @@
                 const result = await response.json();
                 
                 if (response.ok && result.success) {
-                    messageDiv.textContent = '✅ Thanks! We\'ll notify you when we launch.';
+                    messageDiv.textContent = '✅ Thanks! You\'ve been subscribed to our updates.';
                     messageDiv.className = 'email-message success';
                     emailInput.value = '';
                     
@@ -1555,7 +1555,7 @@
                 }
             } finally {
                 submitButton.disabled = false;
-                submitButton.textContent = 'Notify Me';
+                submitButton.textContent = 'Subscribe';
             }
         });
 
