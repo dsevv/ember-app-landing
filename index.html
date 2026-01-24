@@ -1255,6 +1255,7 @@
                         placeholder="Enter your email" 
                         required
                     >
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACOpj-N_6y0__ZqB" data-callback="onTurnstileSuccess"></div>
                     <button 
                         type="submit"
                         id="emailSubmit"
@@ -1342,10 +1343,11 @@
         </div>
     </div>
 
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
-        // Supabase configuration
-        const SUPABASE_URL = 'https://prpdswqojiyzobqbtpgr.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBycGRzd3Fvaml5em9icWJ0cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5NDAwOTcsImV4cCI6MjA3NzUxNjA5N30.9BUmDHGsBVoOvjsyiefLEZGo1XCTQMJ-UEvQcRsEEjg';
+        // Email signup security
+        const EMAIL_SIGNUP_ENDPOINT = 'https://prpdswqojiyzobqbtpgr.supabase.co/functions/v1/email-signup';
+        let turnstileToken = '';
 
         // Testimonials data with names
         const testimonials = [
@@ -1459,6 +1461,10 @@
             return urlParams.get(name);
         }
 
+        window.onTurnstileSuccess = function (token) {
+            turnstileToken = token;
+        };
+
         // Email signup form handler
         document.getElementById('emailSignupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1483,6 +1489,12 @@
                 return;
             }
             
+            if (!turnstileToken) {
+                messageDiv.textContent = 'Please complete the verification step.';
+                messageDiv.className = 'email-message error';
+                return;
+            }
+
             submitButton.disabled = true;
             submitButton.textContent = 'Subscribing...';
             
@@ -1490,16 +1502,16 @@
             const utmParams = getUtmParams();
             
             try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/subscribe_to_email_list`, {
+                const response = await fetch(EMAIL_SIGNUP_ENDPOINT, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        p_email: email,
-                        p_source: 'landing_page'
+                        email,
+                        source: 'landing_page',
+                        token: turnstileToken,
+                        utm: utmParams
                     })
                 });
                 
@@ -1509,6 +1521,7 @@
                     messageDiv.textContent = '✅ Thanks! You\'ve been subscribed to our updates.';
                     messageDiv.className = 'email-message success';
                     emailInput.value = '';
+                    turnstileToken = '';
                     
                     // Track successful email signup conversion
                     // Use window.gtag to ensure it's available
@@ -1536,7 +1549,7 @@
                         console.warn('⚠️ gtag not available, event not tracked');
                     }
                 } else {
-                    throw new Error(result.message || 'Something went wrong');
+                    throw new Error(result.error || 'Something went wrong');
                 }
             } catch (error) {
                 console.error('Signup error:', error);
