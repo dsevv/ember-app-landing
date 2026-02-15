@@ -605,9 +605,22 @@
             max-width: 70%;
             box-sizing: border-box;
         }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('./emberbanner1920X1080-comp.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.75;
+            z-index: 0;
+        }
         
         .testimonials-inner {
             padding: 32px 24px;
+            position: relative;
+            z-index: 1;
         }
         
         .testimonials-title {
@@ -1275,7 +1288,7 @@
             <!-- User Count -->
             <div class="user-count">
                 <div class="user-count-inner">
-                    Don't miss out! Join <span class="number" id="userCount">thousands of</span> users Today!
+                    Join <span class="number" id="userCount">thousands of</span> users today for less than the price of dinner! Cancel at anytime.
                 </div>
             </div>
             
