@@ -1347,12 +1347,7 @@
         </div>
     </div>
 
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
-        // Email signup security
-        const EMAIL_SIGNUP_ENDPOINT = 'https://prpdswqojiyzobqbtpgr.supabase.co/functions/v1/email-signup';
-        let turnstileToken = '';
-
         // Testimonials data with names
         const testimonials = [
             { text: "This app really helps me balance my busy work/life schedule.", author: "Sarah" },
@@ -1464,116 +1459,6 @@
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
-
-        window.onTurnstileSuccess = function (token) {
-            turnstileToken = token;
-        };
-
-        // Email signup form handler
-        document.getElementById('emailSignupForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const emailInput = document.getElementById('emailInput');
-            const messageDiv = document.getElementById('signupMessage');
-            const submitButton = document.getElementById('emailSubmit');
-            const email = emailInput.value.trim();
-            
-            if (!email || !email.includes('@')) {
-                messageDiv.textContent = 'Please enter a valid email address.';
-                messageDiv.className = 'email-message error';
-                
-                // Track validation error
-                if (typeof window.gtag === 'function') {
-                    window.gtag('event', 'email_signup_error', {
-                        'event_category': 'form',
-                        'event_label': 'validation_error',
-                        'value': 0
-                    });
-                }
-                return;
-            }
-            
-            if (!turnstileToken) {
-                messageDiv.textContent = 'Please complete the verification step.';
-                messageDiv.className = 'email-message error';
-                return;
-            }
-
-            submitButton.disabled = true;
-            submitButton.textContent = 'Subscribing...';
-            
-            // Get UTM parameters for tracking
-            const utmParams = getUtmParams();
-            
-            try {
-                const response = await fetch(EMAIL_SIGNUP_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email,
-                        source: 'landing_page',
-                        token: turnstileToken,
-                        utm: utmParams
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (response.ok && result.success) {
-                    messageDiv.textContent = '✅ Thanks! You\'ve been subscribed to our updates.';
-                    messageDiv.className = 'email-message success';
-                    emailInput.value = '';
-                    turnstileToken = '';
-                    
-                    // Track successful email signup conversion
-                    // Use window.gtag to ensure it's available
-                    if (typeof window.gtag === 'function') {
-                        window.gtag('event', 'email_signup', {
-                            'event_category': 'conversion',
-                            'event_label': 'landing_page',
-                            'value': 1,
-                            'currency': 'USD',
-                            // Include UTM parameters for attribution
-                            'utm_source': utmParams.source,
-                            'utm_medium': utmParams.medium,
-                            'utm_campaign': utmParams.campaign,
-                            'utm_content': utmParams.content,
-                            'utm_term': utmParams.term
-                        });
-                        
-                        console.log('✅ Email signup event tracked:', {
-                            event: 'email_signup',
-                            utm_source: utmParams.source,
-                            utm_medium: utmParams.medium,
-                            utm_campaign: utmParams.campaign
-                        });
-                    } else {
-                        console.warn('⚠️ gtag not available, event not tracked');
-                    }
-                } else {
-                    throw new Error(result.error || 'Something went wrong');
-                }
-            } catch (error) {
-                console.error('Signup error:', error);
-                messageDiv.textContent = '❌ Something went wrong. Please try again.';
-                messageDiv.className = 'email-message error';
-                
-                // Track signup error
-                if (typeof window.gtag === 'function') {
-                    window.gtag('event', 'email_signup_error', {
-                        'event_category': 'form',
-                        'event_label': 'api_error',
-                        'value': 0,
-                        'error_message': error.message || 'unknown_error'
-                    });
-                }
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Subscribe';
-            }
-        });
 
         // Fix image paths - try multiple locations (for GitHub Pages)
         function fixImagePaths() {
