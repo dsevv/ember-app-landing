@@ -212,8 +212,12 @@
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.5);
+            background-image: url('./ember press badges_02-2026_verified by redpress.png');
+            background-repeat: no-repeat;
+            background-position: center 24px;
+            background-size: clamp(220px, 70%, 420px) auto;
             z-index: 0;
-            padding-top: 40px;
+            padding-top: 200px;
             padding-bottom: 100px;
             border-radius: 8px;
             box-sizing: border-box;
@@ -905,6 +909,9 @@
             .content-between-dividers {
                 max-width: 99%;
                 width: 99%;
+                background-position: center 20px;
+                background-size: clamp(200px, 80%, 320px) auto;
+                padding-top: 180px;
             }
             
             .dropdown-tabs {
@@ -1155,10 +1162,6 @@
         
         <!-- Content Container Between Dividers -->
         <div class="content-between-dividers">
-            <div class="qr-placeholder" style="margin-top: 0;">
-                <img src="./ember press badges_02-2026_verified by redpress.png" alt="Ember press badges">
-            </div>
-            
             <!-- QR Code Placeholders (iOS and Android) -->
             <div class="qr-placeholder" id="iosQR">
                 <img src="./ios-qr-code.png" alt="iOS QR Code">
