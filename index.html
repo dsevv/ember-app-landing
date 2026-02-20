@@ -1072,68 +1072,7 @@
             }
         }
         
-        /* Scroll to Top Button - Positioned at bottom right of black container */
-        .scroll-to-top {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
-            background: rgba(239, 68, 68, 0.9);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            margin: 0;
-            padding: 0;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        .scroll-to-top:hover {
-            background: rgba(239, 68, 68, 1);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .scroll-to-top:active {
-            transform: translateY(0) scale(1.02);
-        }
-        
-        .scroll-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-        
-        .scroll-to-top-icon {
-            color: #ffffff;
-            width: 24px;
-            height: 24px;
-            stroke-width: 2.5;
-        }
-        
-        @media (max-width: 640px) {
-            .scroll-to-top {
-                width: 48px;
-                height: 48px;
-                bottom: 30px;
-                right: 30px;
-            }
-            
-            .scroll-to-top-icon {
-                width: 22px;
-                height: 22px;
-            }
-        }
+        /* Scroll to Top Button removed */
     </style>
 </head>
 <body>
@@ -1279,13 +1218,6 @@
                 </div>
             </div>
             
-            <!-- Scroll to Top Button (bottom right of black container) -->
-            <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-                <svg class="scroll-to-top-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m17 11-5-5-5 5"/>
-                    <path d="m17 18-5-5-5 5"/>
-                </svg>
-            </button>
         </div>
         
         <!-- Social Media Links -->
@@ -1522,52 +1454,6 @@
             toggle.addEventListener('click', switchPlatform);
         }
 
-        // Scroll to Top Button
-        function initScrollToTop() {
-            const scrollButton = document.getElementById('scrollToTop');
-            
-            if (!scrollButton) {
-                console.error('Scroll to top button not found!');
-                return;
-            }
-            
-            // Show/hide button based on scroll position
-            function toggleScrollButton() {
-                const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-                
-                if (scrollY > 200) {
-                    scrollButton.classList.add('visible');
-                    scrollButton.style.opacity = '1';
-                    scrollButton.style.visibility = 'visible';
-                    scrollButton.style.pointerEvents = 'auto';
-                } else {
-                    scrollButton.classList.remove('visible');
-                    scrollButton.style.opacity = '0';
-                    scrollButton.style.visibility = 'hidden';
-                    scrollButton.style.pointerEvents = 'none';
-                }
-            }
-            
-            // Scroll to top function
-            function scrollToTop(e) {
-                if (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
-            
-            // Add event listeners
-            window.addEventListener('scroll', toggleScrollButton, { passive: true });
-            window.addEventListener('resize', toggleScrollButton);
-            scrollButton.addEventListener('click', scrollToTop);
-            
-            // Check initial scroll position
-            toggleScrollButton();
-        }
 
         // Track App Store badge clicks
         function initAppStoreTracking() {
@@ -1687,7 +1573,6 @@
             initDropdownTabs();
             initTestimonials();
             initPlatformToggle();
-            initScrollToTop();
             initAppStoreTracking();
             initSocialMediaTracking();
             initScrollTracking();
@@ -1699,10 +1584,7 @@
         if (document.readyState === 'loading') {
             console.log('🔵 Document still loading, waiting for DOMContentLoaded');
         } else {
-            console.log('🔵 Document already loaded, running initScrollToTop immediately');
-            setTimeout(() => {
-                initScrollToTop();
-            }, 100);
+            console.log('🔵 Document already loaded');
         }
     </script>
 </body>
