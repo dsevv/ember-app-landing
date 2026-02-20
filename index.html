@@ -195,19 +195,12 @@
         
         /* Title Section Divider */
         .title-divider {
-            margin: 32px auto;
-            padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 700px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
+            display: none;
         }
         
         /* Content Container - Between Dividers */
         .content-between-dividers {
-            --press-badge-top: 24px;
-            --press-badge-bottom: 12px;
+            --press-badge-gap: 16px;
             --press-badge-height: 147px;
             position: relative;
             width: 85vw;
@@ -217,10 +210,10 @@
             background: rgba(0, 0, 0, 0.5);
             background-image: url('./ember press badges_02-2026_verified by redpress.png');
             background-repeat: no-repeat;
-            background-position: center var(--press-badge-top);
+            background-position: center var(--press-badge-gap);
             background-size: auto var(--press-badge-height);
             z-index: 0;
-            padding-top: calc(var(--press-badge-top) + var(--press-badge-height) + var(--press-badge-bottom));
+            padding-top: calc(var(--press-badge-gap) + var(--press-badge-height) + var(--press-badge-gap));
             padding-bottom: 100px;
             border-radius: 8px;
             box-sizing: border-box;
@@ -885,7 +878,7 @@
             margin-top: 40px;
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.875rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: none;
         }
         
         
@@ -912,12 +905,11 @@
             .content-between-dividers {
                 max-width: 99%;
                 width: 99%;
-                --press-badge-top: 20px;
-                --press-badge-bottom: 10px;
+                --press-badge-gap: 14px;
                 --press-badge-height: 126px;
-                background-position: center var(--press-badge-top);
+                background-position: center var(--press-badge-gap);
                 background-size: auto var(--press-badge-height);
-                padding-top: calc(var(--press-badge-top) + var(--press-badge-height) + var(--press-badge-bottom));
+                padding-top: calc(var(--press-badge-gap) + var(--press-badge-height) + var(--press-badge-gap));
             }
             
             .dropdown-tabs {
