@@ -260,6 +260,12 @@
             background: rgba(255, 255, 255, 0.25);
         }
 
+        .vsl-cta svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
         .vsl-hidden {
             display: none !important;
         }
@@ -1127,7 +1133,12 @@
                 ></iframe>
             </div>
             <a class="vsl-cta" href="https://youtube.com/shorts/-fz2_6qoRwE?feature=share" target="_blank" rel="noopener noreferrer">
-                Watch on YouTube
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 3h7v7"></path>
+                    <path d="M10 14L21 3"></path>
+                    <path d="M21 14v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6"></path>
+                </svg>
+                <span class="vsl-cta-label">Open in browser</span>
             </a>
             <!-- Dropdown Tabs Section -->
             <div class="dropdown-tabs">
@@ -1620,7 +1631,10 @@
                     vslEmbed.classList.add('vsl-hidden');
                 }
                 if (vslCta) {
-                    vslCta.textContent = 'Watch on YouTube (opens app)';
+                    const label = vslCta.querySelector('.vsl-cta-label');
+                    if (label) {
+                        label.textContent = 'Open in browser (recommended)';
+                    }
                 }
             }
             console.log('✅ All initialization complete');
