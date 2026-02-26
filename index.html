@@ -220,6 +220,24 @@
             border-radius: 8px;
             box-sizing: border-box;
         }
+
+        /* VSL Embed */
+        .vsl-embed {
+            width: 100%;
+            max-width: 720px;
+            margin: 24px auto 32px;
+            aspect-ratio: 9 / 16;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .vsl-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
         
         /* QR Code Placeholder (Ember Banner) */
         .qr-placeholder {
@@ -897,6 +915,11 @@
                 background-size: auto var(--press-badge-height);
                 padding-top: calc(var(--press-badge-gap) + var(--press-badge-height) + var(--press-badge-gap));
             }
+
+            .vsl-embed {
+                max-width: 92%;
+                margin: 20px auto 28px;
+            }
             
             .dropdown-tabs {
                 padding: 0 10px;
@@ -1067,6 +1090,15 @@
         
         <!-- Content Container Between Dividers -->
         <div class="content-between-dividers">
+            <!-- VSL Embed -->
+            <div class="vsl-embed">
+                <iframe
+                    src="https://www.youtube.com/embed/-fz2_6qoRwE?rel=0&modestbranding=1"
+                    title="Ember VSL"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                ></iframe>
+            </div>
             <!-- Dropdown Tabs Section -->
             <div class="dropdown-tabs">
                 <!-- Features Tab -->
